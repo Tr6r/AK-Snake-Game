@@ -1,0 +1,10 @@
+sources/app/screens/scr_timer.cpp:18:6:void nextStatus()	16	static
+sources/app/screens/scr_timer.cpp:62:6:void increment()	8	static
+sources/app/screens/scr_timer.cpp:98:6:void decrement()	8	static
+sources/app/screens/scr_timer.cpp:257:6:void rt_to_dig(Time*)	8	static
+sources/app/screens/scr_timer.cpp:271:6:void check_and_update_animation()	32	static
+sources/app/screens/scr_timer.cpp:284:6:void init_dw()	0	static
+sources/app/screens/scr_timer.cpp:295:6:void scr_timer_handle(ak_msg_t*)	16	static
+sources/app/screens/scr_timer.cpp:157:6:void render_anim_digit_ex(digit_anim_t*, int, int, int, int)	48	static
+sources/app/screens/scr_timer.cpp:204:6:void render_anim_number2digits_ex(digit_anim_t*, digit_anim_t*, int, int, int, int, bool)	40	static
+sources/app/screens/scr_timer.cpp:221:6:void view_scr_timer()	40	static

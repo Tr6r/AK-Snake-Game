@@ -1,0 +1,3 @@
+sources/networks/rf_protocols/rf24/nwk/nrf_nwk.cpp:72:6:void nrf_nwk_fsm_idle(ak_msg_t*)	112	static
+sources/networks/rf_protocols/rf24/nwk/nrf_nwk.cpp:44:6:void task_rf24_nwk(ak_msg_t*)	0	static
+sources/networks/rf_protocols/rf24/nwk/nrf_nwk.cpp:48:6:void nrf_nwk_fsm_init(ak_msg_t*)	8	static

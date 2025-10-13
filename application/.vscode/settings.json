@@ -1,0 +1,21 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "cortex-debug.gdbPath": "/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb",
+    "cortex-debug.stutilPath": "/usr/bin/st-util",
+
+    "files.associations": {
+        "rtc.h": "c",
+        "stdlib.h": "c",
+        "stm32l1xx_rtc.h": "c",
+        "stdbool.h": "c",
+        "stm32l1xx_conf.h": "c",
+        "stm32l1xx_sdio.h": "c",
+        "io_cfg.h": "c",
+        "nrf24.h": "c",
+        "task_log.h": "c",
+        "log.h": "c",
+        "stdint.h": "c",
+        "app_eeprom.h": "c"
+    },
+
+}

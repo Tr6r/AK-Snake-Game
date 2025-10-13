@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "make",
+            "args": [],
+            "options": {
+                "cwd": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "flash",
+            "type": "shell",
+            "command": "make",
+            "args": ["flash"],
+            "options": {
+                "cwd": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always"
+            }
+        }
+    ]
+}

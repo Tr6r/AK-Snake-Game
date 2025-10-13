@@ -1,0 +1,3 @@
+sources/app/app_rf24.cpp:4:6:void RF24App_Init()	72	static
+sources/app/app_rf24.cpp:21:23:nRF24_TX_PCKT_TypeDef RF24App_Send(uint8_t*, uint8_t)	0	static
+sources/app/app_rf24.cpp:28:23:nRF24_RX_PCKT_TypeDef RF24App_Receive(uint8_t*, uint8_t)	0	static

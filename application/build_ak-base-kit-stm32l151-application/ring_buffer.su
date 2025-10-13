@@ -1,0 +1,12 @@
+sources/common/container/ring_buffer.c:9:6:ring_buffer_init	8	static
+sources/common/container/ring_buffer.c:20:10:ring_buffer_availble	0	static
+sources/common/container/ring_buffer.c:25:6:ring_buffer_is_empty	0	static
+sources/common/container/ring_buffer.c:30:6:ring_buffer_is_full	0	static
+sources/common/container/ring_buffer.c:35:9:ring_buffer_put	8	static
+sources/common/container/ring_buffer.c:65:9:ring_buffer_get	8	static
+sources/common/container/ring_buffer.c:91:6:ring_buffer_char_init	0	static
+sources/common/container/ring_buffer.c:101:10:ring_buffer_char_availble	0	static
+sources/common/container/ring_buffer.c:106:6:ring_buffer_char_is_empty	0	static
+sources/common/container/ring_buffer.c:111:6:ring_buffer_char_is_full	0	static
+sources/common/container/ring_buffer.c:116:6:ring_buffer_char_put	0	static
+sources/common/container/ring_buffer.c:137:9:ring_buffer_char_get	12	static

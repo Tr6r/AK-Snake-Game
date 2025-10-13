@@ -1,0 +1,17 @@
+sources/driver/nRF24/nRF24.c:58:6:nRF24_WriteReg	24	static
+sources/driver/nRF24/nRF24.c:75:9:nRF24_ReadReg	16	static
+sources/driver/nRF24/nRF24.c:96:6:nRF24_ReadBuf	24	static
+sources/driver/nRF24/nRF24.c:113:6:nRF24_WriteBuf	24	static
+sources/driver/nRF24/nRF24.c:129:9:nRF24_Check	16	static
+sources/driver/nRF24/nRF24.c:145:6:nRF24_SetRFChannel	0	static
+sources/driver/nRF24/nRF24.c:150:6:nRF24_FlushTX	0	static
+sources/driver/nRF24/nRF24.c:155:6:nRF24_FlushRX	0	static
+sources/driver/nRF24/nRF24.c:170:6:nRF24_TXMode	32	static
+sources/driver/nRF24/nRF24.c:310:6:nRF24_ClearIRQFlags	8	static
+sources/driver/nRF24/nRF24.c:17:6:nRF24_Init	32	static
+sources/driver/nRF24/nRF24.c:195:6:nRF24_RXMode	32	static
+sources/driver/nRF24/nRF24.c:230:23:nRF24_TXPacket	16	static
+sources/driver/nRF24/nRF24.c:278:23:nRF24_RXPacket	24	static
+sources/driver/nRF24/nRF24.c:318:6:nRF24_PowerDown	8	static
+sources/driver/nRF24/nRF24.c:329:6:nRF24_Wake	8	static
+sources/driver/nRF24/nRF24.c:339:6:nRF24_SetTXPower	8	static
