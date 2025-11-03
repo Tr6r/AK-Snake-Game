@@ -594,13 +594,6 @@ int32_t shell_lcd(uint8_t* argv) {
 int32_t shell_dbg(uint8_t* argv) {
 	(void)(argv);
 	switch (*(argv + 4)) {
-	case '0': {
-#if defined(TASK_ZIGBEE_EN)
-		task_post_pure_msg(AC_TASK_ZIGBEE_ID, AC_ZIGBEE_PERMIT_JOINING_REQ);
-#endif
-	}
-		break;
-
 	case 'v': {
 		uint32_t vbat;
 		(void)vbat;

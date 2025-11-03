@@ -30,9 +30,6 @@ enum {
 	AC_TASK_GAME_ID,
 	AC_TASK_SNAKE_ID,
 
-#if defined(TASK_ZIGBEE_EN)
-	AC_TASK_ZIGBEE_ID,
-#endif
 
 	/* NRF24 NETWORKS */
 #if defined (IF_NETWORK_NRF24_EN)
@@ -59,7 +56,6 @@ enum {
 /*****************************************************************************/
 enum {
 	/* APP TASKS */
-	AC_TASK_POLLING_ZIGBEE_ID,
 	AC_TASK_POLLING_CONSOLE_ID,
 
 	/* EOT polling task ID */
@@ -80,7 +76,6 @@ extern void task_rf24_if(ak_msg_t*);
 extern void task_uart_if(ak_msg_t*);
 extern void task_dbg(ak_msg_t*);
 extern void task_display(ak_msg_t*);
-extern void task_zigbee(ak_msg_t*);
 extern void task_log(ak_msg_t*); 
 // extern void task_snake(ak_msg_t*); 
 extern void task_game(ak_msg_t*); 

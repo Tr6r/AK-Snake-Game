@@ -23,7 +23,6 @@ enum {
 	GW_LINK_ID,
 
 	/* APP TASKS */
-	GW_TASK_ZIGBEE_ID,
 
 	/* EOT task ID */
 	AK_TASK_LIST_LEN,

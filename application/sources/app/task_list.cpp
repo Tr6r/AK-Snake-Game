@@ -21,10 +21,6 @@ const task_t app_task_table[] = {
 	{AC_TASK_DISPLAY_ID			,	TASK_PRI_LEVEL_4	,	task_display		},
 	{AC_TASK_GAME_ID			,	TASK_PRI_LEVEL_6	,	task_game			},
 
-	#if defined(TASK_ZIGBEE_EN)
-	{AC_TASK_ZIGBEE_ID			,	TASK_PRI_LEVEL_4	,	task_zigbee			},
-	#endif
-
 	/*************************************************************************/
 	/* RF24 NETWORK TASK */
 	/*************************************************************************/
