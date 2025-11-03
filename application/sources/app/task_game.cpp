@@ -35,8 +35,8 @@ void task_game(ak_msg_t *msg)
         game.gameChangeState(GAME_STATE_PLAYING);
         xprintf("snake speedddd: %d\n", game.snakeGetSpeed());
 
-        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
-        timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
+        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
+        // timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
         timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
 
         break;

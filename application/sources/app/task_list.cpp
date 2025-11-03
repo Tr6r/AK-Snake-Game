@@ -11,7 +11,6 @@ const task_t app_task_table[] = {
 	/* APP TASK */
 	/*************************************************************************/
 	{AC_TASK_SYSTEM_ID			,	TASK_PRI_LEVEL_2	,	task_system			},
-	{AC_TASK_FW_ID				,	TASK_PRI_LEVEL_2	,	task_fw				},
 	{AC_TASK_LIFE_ID			,	TASK_PRI_LEVEL_6	,	task_life			},
 	{AC_TASK_DBG_ID				,	TASK_PRI_LEVEL_4	,	task_dbg			},
 	{AC_TASK_DISPLAY_ID			,	TASK_PRI_LEVEL_4	,	task_display		},

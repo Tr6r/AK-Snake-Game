@@ -170,7 +170,7 @@ void task_fw(ak_msg_t* msg) {
 
 		/* TODO: when recieve firmware update request.
 		 * depend on each system, we need to check system state then decide update or respondse busy signal */
-		task_post_pure_msg(AC_TASK_FW_ID, FW_UPDATE_SM_OK);
+		// task_post_pure_msg(AC_TASK_FW_ID, FW_UPDATE_SM_OK);
 		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_FW_UPDATE);
 	}
 		break;
@@ -214,7 +214,7 @@ void task_fw(ak_msg_t* msg) {
 		sys_ctrl_independent_watchdog_reset();
 		sys_ctrl_soft_watchdog_reset();
 
-		timer_set(AC_TASK_FW_ID, FW_PACKED_TIMEOUT, FW_PACKED_TIMEOUT_INTERVAL, TIMER_ONE_SHOT);
+		// timer_set(AC_TASK_FW_ID, FW_PACKED_TIMEOUT, FW_PACKED_TIMEOUT_INTERVAL, TIMER_ONE_SHOT);
 
 		/* write firmware packet to external flash */
 		uint8_t* firmware_packet = get_data_common_msg(msg);
@@ -229,7 +229,7 @@ void task_fw(ak_msg_t* msg) {
 
 		/* transfer completed */
 		if (bin_file_cursor >= firmware_header_file.bin_len) {
-			timer_remove_attr(AC_TASK_FW_ID, FW_PACKED_TIMEOUT);
+			// timer_remove_attr(AC_TASK_FW_ID, FW_PACKED_TIMEOUT);
 
 			/* start calculate chechsum */
 			uint32_t checksum_buffer = 0;
@@ -267,7 +267,7 @@ void task_fw(ak_msg_t* msg) {
 			set_if_sig(s_msg, GW_FW_TRANSFER_RES_OK);
 		}
 
-		set_if_src_task_id(s_msg, AC_TASK_FW_ID);
+		// set_if_src_task_id(s_msg, AC_TASK_FW_ID);
 		set_if_des_task_id(s_msg, host_firmware_task_id);
 		set_if_des_type(s_msg, host_firmware_if_type);
 
