@@ -237,52 +237,52 @@ void fsm_link_state_handle(ak_msg_t* msg) {
 		link_frame_t* link_frame = (link_frame_t*)link_pdu->payload;
 
 		switch (link_frame->header.type) {
-		case LINK_FRAME_TYPE_PURE_MSG: {
-			ak_msg_pure_if_t* if_msg = (ak_msg_pure_if_t*)link_frame->data;
+		// case LINK_FRAME_TYPE_PURE_MSG: {
+		// 	ak_msg_pure_if_t* if_msg = (ak_msg_pure_if_t*)link_frame->data;
 
-			ak_msg_t* s_msg = get_pure_msg();
-			set_if_src_task_id(s_msg, if_msg->header.src_task_id);
-			set_if_des_task_id(s_msg, if_msg->header.des_task_id);
-			set_if_src_type(s_msg, if_msg->header.if_src_type);
-			set_if_des_type(s_msg, if_msg->header.if_des_type);
-			set_if_sig(s_msg, if_msg->header.sig);
+		// 	ak_msg_t* s_msg = get_pure_msg();
+		// 	set_if_src_task_id(s_msg, if_msg->header.src_task_id);
+		// 	set_if_des_task_id(s_msg, if_msg->header.des_task_id);
+		// 	set_if_src_type(s_msg, if_msg->header.if_src_type);
+		// 	set_if_des_type(s_msg, if_msg->header.if_des_type);
+		// 	set_if_sig(s_msg, if_msg->header.sig);
 
-			set_msg_sig(s_msg, AC_UART_IF_PURE_MSG_IN);
-			task_post(AC_TASK_UART_IF_ID, s_msg);
-		}
-			break;
+		// 	set_msg_sig(s_msg, AC_UART_IF_PURE_MSG_IN);
+		// 	task_post(AC_TASK_UART_IF_ID, s_msg);
+		// }
+		// 	break;
 
-		case LINK_FRAME_TYPE_COMMON_MSG: {
-			ak_msg_common_if_t* if_msg = (ak_msg_common_if_t*)link_frame->data;
+		// case LINK_FRAME_TYPE_COMMON_MSG: {
+		// 	ak_msg_common_if_t* if_msg = (ak_msg_common_if_t*)link_frame->data;
 
-			ak_msg_t* s_msg = get_common_msg();
-			set_if_src_task_id(s_msg, if_msg->header.src_task_id);
-			set_if_des_task_id(s_msg, if_msg->header.des_task_id);
-			set_if_src_type(s_msg, if_msg->header.if_src_type);
-			set_if_des_type(s_msg, if_msg->header.if_des_type);
-			set_if_sig(s_msg, if_msg->header.sig);
-			set_if_data_common_msg(s_msg, if_msg->data, if_msg->len);
+		// 	ak_msg_t* s_msg = get_common_msg();
+		// 	set_if_src_task_id(s_msg, if_msg->header.src_task_id);
+		// 	set_if_des_task_id(s_msg, if_msg->header.des_task_id);
+		// 	set_if_src_type(s_msg, if_msg->header.if_src_type);
+		// 	set_if_des_type(s_msg, if_msg->header.if_des_type);
+		// 	set_if_sig(s_msg, if_msg->header.sig);
+		// 	set_if_data_common_msg(s_msg, if_msg->data, if_msg->len);
 
-			set_msg_sig(s_msg, AC_UART_IF_COMMON_MSG_IN);
-			task_post(AC_TASK_UART_IF_ID, s_msg);
-		}
-			break;
+		// 	set_msg_sig(s_msg, AC_UART_IF_COMMON_MSG_IN);
+		// 	task_post(AC_TASK_UART_IF_ID, s_msg);
+		// }
+		// 	break;
 
-		case LINK_FRAME_TYPE_DYNAMIC_MSG: {
-			ak_msg_dynamic_if_t* if_msg = (ak_msg_dynamic_if_t*)link_frame->data;
+		// case LINK_FRAME_TYPE_DYNAMIC_MSG: {
+		// 	ak_msg_dynamic_if_t* if_msg = (ak_msg_dynamic_if_t*)link_frame->data;
 
-			ak_msg_t* s_msg = get_dynamic_msg();
-			set_if_src_task_id(s_msg, if_msg->header.src_task_id);
-			set_if_des_task_id(s_msg, if_msg->header.des_task_id);
-			set_if_src_type(s_msg, if_msg->header.if_src_type);
-			set_if_des_type(s_msg, if_msg->header.if_des_type);
-			set_if_sig(s_msg, if_msg->header.sig);
-			set_if_data_dynamic_msg(s_msg, (uint8_t*)&link_frame->data[sizeof(ak_msg_if_header_t) + sizeof(uint32_t)], if_msg->len);
+		// 	ak_msg_t* s_msg = get_dynamic_msg();
+		// 	set_if_src_task_id(s_msg, if_msg->header.src_task_id);
+		// 	set_if_des_task_id(s_msg, if_msg->header.des_task_id);
+		// 	set_if_src_type(s_msg, if_msg->header.if_src_type);
+		// 	set_if_des_type(s_msg, if_msg->header.if_des_type);
+		// 	set_if_sig(s_msg, if_msg->header.sig);
+		// 	set_if_data_dynamic_msg(s_msg, (uint8_t*)&link_frame->data[sizeof(ak_msg_if_header_t) + sizeof(uint32_t)], if_msg->len);
 
-			set_msg_sig(s_msg, AC_UART_IF_DYNAMIC_MSG_IN);
-			task_post(AC_TASK_UART_IF_ID, s_msg);
-		}
-			break;
+		// 	set_msg_sig(s_msg, AC_UART_IF_DYNAMIC_MSG_IN);
+		// 	task_post(AC_TASK_UART_IF_ID, s_msg);
+		// }
+		// 	break;
 
 		case LINK_FRAME_TYPE_DATA: {
 

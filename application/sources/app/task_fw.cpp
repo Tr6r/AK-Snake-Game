@@ -56,33 +56,33 @@ void task_fw(ak_msg_t* msg) {
 		}
 
 		/* notify update app firmware completed */
-		if (sb.fw_app_cmd.cmd == SYS_BOOT_CMD_UPDATE_RES) {
-			/* TODO: update firmware completed */
-			ak_msg_t* s_msg = get_pure_msg();
-			set_if_src_task_id(s_msg,	sb.fw_app_cmd.ak_msg_res.src_task_id);
-			set_if_des_task_id(s_msg,	sb.fw_app_cmd.ak_msg_res.des_task_id);
-			set_if_src_type(s_msg,		sb.fw_app_cmd.ak_msg_res.if_src_type);
-			set_if_des_type(s_msg,		sb.fw_app_cmd.ak_msg_res.if_des_type);
-			set_if_sig(s_msg,			sb.fw_app_cmd.ak_msg_res.sig);
-			set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
-			task_post(AC_TASK_IF_ID, s_msg);
-		}
+		// if (sb.fw_app_cmd.cmd == SYS_BOOT_CMD_UPDATE_RES) {
+		// 	/* TODO: update firmware completed */
+		// 	ak_msg_t* s_msg = get_pure_msg();
+		// 	set_if_src_task_id(s_msg,	sb.fw_app_cmd.ak_msg_res.src_task_id);
+		// 	set_if_des_task_id(s_msg,	sb.fw_app_cmd.ak_msg_res.des_task_id);
+		// 	set_if_src_type(s_msg,		sb.fw_app_cmd.ak_msg_res.if_src_type);
+		// 	set_if_des_type(s_msg,		sb.fw_app_cmd.ak_msg_res.if_des_type);
+		// 	set_if_sig(s_msg,			sb.fw_app_cmd.ak_msg_res.sig);
+		// 	set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
+		// 	task_post(AC_TASK_IF_ID, s_msg);
+		// }
 
-		/* reset update command */
-		sb.fw_app_cmd.cmd = SYS_BOOT_CMD_NONE;
+		// /* reset update command */
+		// sb.fw_app_cmd.cmd = SYS_BOOT_CMD_NONE;
 
-		/* notify update boot firmware completed */
-		if (sb.fw_boot_cmd.cmd == SYS_BOOT_CMD_UPDATE_RES) {
-			/* TODO: update firmware completed */
-			ak_msg_t* s_msg = get_pure_msg();
-			set_if_src_task_id(s_msg,	sb.fw_boot_cmd.ak_msg_res.src_task_id);
-			set_if_des_task_id(s_msg,	sb.fw_boot_cmd.ak_msg_res.des_task_id);
-			set_if_src_type(s_msg,		sb.fw_boot_cmd.ak_msg_res.if_src_type);
-			set_if_des_type(s_msg,		sb.fw_boot_cmd.ak_msg_res.if_des_type);
-			set_if_sig(s_msg,			sb.fw_boot_cmd.ak_msg_res.sig);
-			set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
-			task_post(AC_TASK_IF_ID, s_msg);
-		}
+		// /* notify update boot firmware completed */
+		// if (sb.fw_boot_cmd.cmd == SYS_BOOT_CMD_UPDATE_RES) {
+		// 	/* TODO: update firmware completed */
+		// 	ak_msg_t* s_msg = get_pure_msg();
+		// 	set_if_src_task_id(s_msg,	sb.fw_boot_cmd.ak_msg_res.src_task_id);
+		// 	set_if_des_task_id(s_msg,	sb.fw_boot_cmd.ak_msg_res.des_task_id);
+		// 	set_if_src_type(s_msg,		sb.fw_boot_cmd.ak_msg_res.if_src_type);
+		// 	set_if_des_type(s_msg,		sb.fw_boot_cmd.ak_msg_res.if_des_type);
+		// 	set_if_sig(s_msg,			sb.fw_boot_cmd.ak_msg_res.sig);
+		// 	set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
+		// 	task_post(AC_TASK_IF_ID, s_msg);
+		// }
 
 		/* reset update command */
 		sb.fw_boot_cmd.cmd = SYS_BOOT_CMD_NONE;
@@ -100,60 +100,60 @@ void task_fw(ak_msg_t* msg) {
 	}
 		break;
 
-	case FW_CRENT_APP_FW_INFO_REQ: {
-		APP_DBG_SIG("FW_CRENT_APP_FW_INFO_REQ\n");
-		sys_boot_t sb;
-		sys_boot_get(&sb);
+	// case FW_CRENT_APP_FW_INFO_REQ: {
+	// 	APP_DBG_SIG("FW_CRENT_APP_FW_INFO_REQ\n");
+	// 	sys_boot_t sb;
+	// 	sys_boot_get(&sb);
 
-		/* update respondse message */
-		sb.fw_app_cmd.ak_msg_res.des_task_id = msg->if_src_task_id;
-		sb.fw_app_cmd.ak_msg_res.src_task_id = msg->if_des_task_id;
-		sb.fw_app_cmd.ak_msg_res.if_des_type = msg->if_src_type;
-		sb.fw_app_cmd.ak_msg_res.if_src_type = msg->if_des_type;
-		sb.fw_app_cmd.ak_msg_res.sig = GW_FW_UPDATE_COMPLETED;
-		sys_boot_set(&sb);
+	// 	/* update respondse message */
+	// 	sb.fw_app_cmd.ak_msg_res.des_task_id = msg->if_src_task_id;
+	// 	sb.fw_app_cmd.ak_msg_res.src_task_id = msg->if_des_task_id;
+	// 	sb.fw_app_cmd.ak_msg_res.if_des_type = msg->if_src_type;
+	// 	sb.fw_app_cmd.ak_msg_res.if_src_type = msg->if_des_type;
+	// 	sb.fw_app_cmd.ak_msg_res.sig = GW_FW_UPDATE_COMPLETED;
+	// 	sys_boot_set(&sb);
 
-		firmware_header_t firmware_header_req;
-		sys_ctrl_get_firmware_info(&firmware_header_req);
+	// 	firmware_header_t firmware_header_req;
+	// 	sys_ctrl_get_firmware_info(&firmware_header_req);
 
-		ak_msg_t* s_msg = get_common_msg();
+	// 	ak_msg_t* s_msg = get_common_msg();
 
-		set_if_src_task_id(s_msg, AC_TASK_FW_ID);
-		set_if_des_task_id(s_msg, msg->if_src_task_id);
-		set_if_des_type(s_msg, msg->if_src_type);
-		set_if_sig(s_msg, GW_FW_CURRENT_INFO_RES);
-		set_if_data_common_msg(s_msg, (uint8_t*)&firmware_header_req, sizeof(firmware_header_t));
+	// 	set_if_src_task_id(s_msg, AC_TASK_FW_ID);
+	// 	set_if_des_task_id(s_msg, msg->if_src_task_id);
+	// 	set_if_des_type(s_msg, msg->if_src_type);
+	// 	set_if_sig(s_msg, GW_FW_CURRENT_INFO_RES);
+	// 	set_if_data_common_msg(s_msg, (uint8_t*)&firmware_header_req, sizeof(firmware_header_t));
 
-		set_msg_sig(s_msg, AC_IF_COMMON_MSG_OUT);
-		task_post(AC_TASK_IF_ID, s_msg);
-	}
-		break;
+	// 	set_msg_sig(s_msg, AC_IF_COMMON_MSG_OUT);
+	// 	task_post(AC_TASK_IF_ID, s_msg);
+	// }
+	// 	break;
 
-	case FW_CRENT_BOOT_FW_INFO_REQ: {
-		APP_DBG_SIG("FW_CRENT_BOOT_FW_INFO_REQ\n");
-		sys_boot_t sb;
-		sys_boot_get(&sb);
+	// case FW_CRENT_BOOT_FW_INFO_REQ: {
+	// 	APP_DBG_SIG("FW_CRENT_BOOT_FW_INFO_REQ\n");
+	// 	sys_boot_t sb;
+	// 	sys_boot_get(&sb);
 
-		/* update respondse message */
-		sb.fw_boot_cmd.ak_msg_res.des_task_id = msg->if_src_task_id;
-		sb.fw_boot_cmd.ak_msg_res.src_task_id = msg->if_des_task_id;
-		sb.fw_boot_cmd.ak_msg_res.if_des_type = msg->if_src_type;
-		sb.fw_boot_cmd.ak_msg_res.if_src_type = msg->if_des_type;
-		sb.fw_boot_cmd.ak_msg_res.sig = GW_FW_UPDATE_COMPLETED;
-		sys_boot_set(&sb);
+	// 	/* update respondse message */
+	// 	sb.fw_boot_cmd.ak_msg_res.des_task_id = msg->if_src_task_id;
+	// 	sb.fw_boot_cmd.ak_msg_res.src_task_id = msg->if_des_task_id;
+	// 	sb.fw_boot_cmd.ak_msg_res.if_des_type = msg->if_src_type;
+	// 	sb.fw_boot_cmd.ak_msg_res.if_src_type = msg->if_des_type;
+	// 	sb.fw_boot_cmd.ak_msg_res.sig = GW_FW_UPDATE_COMPLETED;
+	// 	sys_boot_set(&sb);
 
-		ak_msg_t* s_msg = get_common_msg();
+	// 	ak_msg_t* s_msg = get_common_msg();
 
-		set_if_src_task_id(s_msg, AC_TASK_FW_ID);
-		set_if_des_task_id(s_msg, msg->if_src_task_id);
-		set_if_des_type(s_msg, msg->if_src_type);
-		set_if_sig(s_msg, GW_FW_CURRENT_INFO_RES);
-		set_if_data_common_msg(s_msg, (uint8_t*)&sb.current_fw_boot_header, sizeof(firmware_header_t));
+	// 	set_if_src_task_id(s_msg, AC_TASK_FW_ID);
+	// 	set_if_des_task_id(s_msg, msg->if_src_task_id);
+	// 	set_if_des_type(s_msg, msg->if_src_type);
+	// 	set_if_sig(s_msg, GW_FW_CURRENT_INFO_RES);
+	// 	set_if_data_common_msg(s_msg, (uint8_t*)&sb.current_fw_boot_header, sizeof(firmware_header_t));
 
-		set_msg_sig(s_msg, AC_IF_COMMON_MSG_OUT);
-		task_post(AC_TASK_IF_ID, s_msg);
-	}
-		break;
+	// 	set_msg_sig(s_msg, AC_IF_COMMON_MSG_OUT);
+	// 	task_post(AC_TASK_IF_ID, s_msg);
+	// }
+	// 	break;
 
 	case FW_UPDATE_REQ: {
 		APP_DBG_SIG("FW_UPDATE_REQ\n");
@@ -175,40 +175,40 @@ void task_fw(ak_msg_t* msg) {
 	}
 		break;
 
-	case FW_UPDATE_SM_OK: {
-		/* clear flash loader */
-		for (int i = 0; i < APP_FLASH_FIRMWARE_BLOCK_64K_SIZE; i++) {
-			flash_erase_block_64k(APP_FLASH_FIRMWARE_START_ADDR + (FLASH_BLOCK_64K_SIZE * i));
-		}
-		APP_DBG("erase temp OK\n");
+	// case FW_UPDATE_SM_OK: {
+	// 	/* clear flash loader */
+	// 	for (int i = 0; i < APP_FLASH_FIRMWARE_BLOCK_64K_SIZE; i++) {
+	// 		flash_erase_block_64k(APP_FLASH_FIRMWARE_START_ADDR + (FLASH_BLOCK_64K_SIZE * i));
+	// 	}
+	// 	APP_DBG("erase temp OK\n");
 
-		ak_msg_t* s_msg = get_pure_msg();
+	// 	ak_msg_t* s_msg = get_pure_msg();
 
-		set_if_src_task_id(s_msg, AC_TASK_FW_ID);
-		set_if_des_task_id(s_msg, host_firmware_task_id);
-		set_if_des_type(s_msg, host_firmware_if_type);
-		set_if_sig(s_msg, GW_FW_UPDATE_RES_OK);
+	// 	set_if_src_task_id(s_msg, AC_TASK_FW_ID);
+	// 	set_if_des_task_id(s_msg, host_firmware_task_id);
+	// 	set_if_des_type(s_msg, host_firmware_if_type);
+	// 	set_if_sig(s_msg, GW_FW_UPDATE_RES_OK);
 
-		set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
-		task_post(AC_TASK_IF_ID, s_msg);
+	// 	set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
+	// 	task_post(AC_TASK_IF_ID, s_msg);
 
-		timer_set(AC_TASK_FW_ID, FW_PACKED_TIMEOUT, FW_PACKED_TIMEOUT_INTERVAL, TIMER_ONE_SHOT);
-	}
-		break;
+	// 	timer_set(AC_TASK_FW_ID, FW_PACKED_TIMEOUT, FW_PACKED_TIMEOUT_INTERVAL, TIMER_ONE_SHOT);
+	// }
+	// 	break;
 
-	case FW_UPDATE_SM_BUSY: {
-		APP_DBG_SIG("FW_UPDATE_SM_BUSY\n");
-		ak_msg_t* s_msg = get_pure_msg();
+	// case FW_UPDATE_SM_BUSY: {
+	// 	APP_DBG_SIG("FW_UPDATE_SM_BUSY\n");
+	// 	ak_msg_t* s_msg = get_pure_msg();
 
-		set_if_src_task_id(s_msg, AC_TASK_FW_ID);
-		set_if_des_task_id(s_msg, host_firmware_task_id);
-		set_if_des_type(s_msg, host_firmware_if_type);
-		set_if_sig(s_msg, GW_FW_UPDATE_BUSY);
+	// 	set_if_src_task_id(s_msg, AC_TASK_FW_ID);
+	// 	set_if_des_task_id(s_msg, host_firmware_task_id);
+	// 	set_if_des_type(s_msg, host_firmware_if_type);
+	// 	set_if_sig(s_msg, GW_FW_UPDATE_BUSY);
 
-		set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
-		task_post(AC_TASK_IF_ID, s_msg);
-	}
-		break;
+	// 	set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
+	// 	task_post(AC_TASK_IF_ID, s_msg);
+	// }
+	// 	break;
 
 	case FW_TRANSFER_REQ: {
 		sys_ctrl_independent_watchdog_reset();
@@ -272,7 +272,7 @@ void task_fw(ak_msg_t* msg) {
 		set_if_des_type(s_msg, host_firmware_if_type);
 
 		set_msg_sig(s_msg, AC_IF_PURE_MSG_OUT);
-		task_post(AC_TASK_IF_ID, s_msg);
+		// task_post(AC_TASK_IF_ID, s_msg);
 	}
 		break;
 

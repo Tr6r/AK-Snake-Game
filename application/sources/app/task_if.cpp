@@ -105,29 +105,29 @@ void if_des_type_uart_handler(ak_msg_t* msg) {
 	}
 		break;
 
-	case AC_IF_PURE_MSG_OUT: {
-		APP_DBG_SIG("AC_IF_PURE_MSG_OUT\n");
-		msg_inc_ref_count(msg);
-		set_msg_sig(msg, AC_UART_IF_PURE_MSG_OUT);
-		task_post(AC_TASK_UART_IF_ID, msg);
-	}
-		break;
+	// case AC_IF_PURE_MSG_OUT: {
+	// 	APP_DBG_SIG("AC_IF_PURE_MSG_OUT\n");
+	// 	msg_inc_ref_count(msg);
+	// 	set_msg_sig(msg, AC_UART_IF_PURE_MSG_OUT);
+	// 	task_post(AC_TASK_UART_IF_ID, msg);
+	// }
+	// 	break;
 
-	case AC_IF_COMMON_MSG_OUT: {
-		APP_DBG_SIG("AC_IF_COMMON_MSG_OUT\n");
-		msg_inc_ref_count(msg);
-		set_msg_sig(msg, AC_UART_IF_COMMON_MSG_OUT);
-		task_post(AC_TASK_UART_IF_ID, msg);
-	}
-		break;
+	// case AC_IF_COMMON_MSG_OUT: {
+	// 	APP_DBG_SIG("AC_IF_COMMON_MSG_OUT\n");
+	// 	msg_inc_ref_count(msg);
+	// 	set_msg_sig(msg, AC_UART_IF_COMMON_MSG_OUT);
+	// 	task_post(AC_TASK_UART_IF_ID, msg);
+	// }
+	// 	break;
 
-	case AC_IF_DYNAMIC_MSG_OUT: {
-		APP_DBG_SIG("AC_IF_DYNAMIC_MSG_OUT\n");
-		msg_inc_ref_count(msg);
-		set_msg_sig(msg, AC_UART_IF_DYNAMIC_MSG_OUT);
-		task_post(AC_TASK_UART_IF_ID, msg);
-	}
-		break;
+	// case AC_IF_DYNAMIC_MSG_OUT: {
+	// 	APP_DBG_SIG("AC_IF_DYNAMIC_MSG_OUT\n");
+	// 	msg_inc_ref_count(msg);
+	// 	set_msg_sig(msg, AC_UART_IF_DYNAMIC_MSG_OUT);
+	// 	task_post(AC_TASK_UART_IF_ID, msg);
+	// }
+	// 	break;
 
 	default:
 		break;
