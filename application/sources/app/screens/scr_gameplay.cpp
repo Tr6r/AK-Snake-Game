@@ -278,19 +278,6 @@ void scr_gameplay_handle(ak_msg_t *msg)
 
         break;
 
-    case AC_GAME_BUTON_UP_PRESS:
-        xprintf("OK\n");
-
-        
-
-        break;
-
-    case AC_GAME_BUTON_DOWN_PRESS:
-        xprintf("OK\n");
-
-        
-
-        break;
     case AC_DISPLAY_SNAKE_UPDATE:
 
         apple_blink_count++;
