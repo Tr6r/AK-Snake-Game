@@ -18,7 +18,6 @@ extern "C"
 #include "nrf_nwk_sig.h"
 #endif
 
-#include "app_if.h"
 #include "app_eeprom.h"
 #include "app_data.h"
 #include "rtc.h"

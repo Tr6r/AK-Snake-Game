@@ -8,7 +8,6 @@
 #include "sys_dbg.h"
 
 #include "app.h"
-#include "app_if.h"
 #include "app_dbg.h"
 
 #include "task_list.h"
