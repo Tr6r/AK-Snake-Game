@@ -27,6 +27,8 @@ enum {
 	AC_TASK_DBG_ID,
 	AC_TASK_DISPLAY_ID,
 	AC_TASK_LOG_ID,
+	AC_TASK_GAME_ID,
+	AC_TASK_SNAKE_ID,
 
 #if defined(TASK_ZIGBEE_EN)
 	AC_TASK_ZIGBEE_ID,
@@ -80,6 +82,8 @@ extern void task_dbg(ak_msg_t*);
 extern void task_display(ak_msg_t*);
 extern void task_zigbee(ak_msg_t*);
 extern void task_log(ak_msg_t*); 
+// extern void task_snake(ak_msg_t*); 
+extern void task_game(ak_msg_t*); 
 
 
 /* RF24 NETWORK TASK */

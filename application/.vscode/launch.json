@@ -7,11 +7,11 @@
       "request": "launch",
       "servertype": "openocd",
       // File ELF (axf) để debug
-      "executable": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application/build_AK-Snake-Game-application/AK-Snake-Game-application.axf",
+      "executable": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application/build_ak-base-kit-stm32l151-application/ak-base-kit-stm32l151-application.axf",
       "device": "STM32L151RE",
       "runToEntryPoint": "main_app",
       "svdFile": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application/STM32L151.svd",
-      "preLaunchTask": "flash",
+      // "preLaunchTask": "flash",
       // Đường dẫn GDB compiler
       "gdbPath": "/home/dinhcuong/Documents/GNU_Toolchain/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gdb",
       // OpenOCD scripts

@@ -83,6 +83,19 @@ int view_render_dynamic(void* dynamic) {
 	return 0;
 }
 
+
+// void view_render_drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
+//                             int16_t w, int16_t h, uint16_t color) {
+//     for (int16_t j = 0; j < h; j++) {
+//         for (int16_t i = 0; i < w; i++) {
+//             // Đọc từng bit từ PROGMEM
+//             uint8_t byte = pgm_read_byte(bitmap + (j * ((w + 7) / 8)) + (i / 8));
+//             if (byte & (0x80 >> (i % 8))) {
+//                 view_render.drawPixel(x + i, y + j, color);
+//             }
+//         }
+//     }
+// }
 int view_render_screen(view_screen_t* screen) {
 	view_render.clear();
 

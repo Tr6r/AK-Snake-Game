@@ -20,6 +20,8 @@ const task_t app_task_table[] = {
 	{AC_TASK_DBG_ID				,	TASK_PRI_LEVEL_4	,	task_dbg			},
 	{AC_TASK_DISPLAY_ID			,	TASK_PRI_LEVEL_4	,	task_display		},
 	{AC_TASK_LOG_ID				,	TASK_PRI_LEVEL_4	,	task_log			},
+	{AC_TASK_GAME_ID			,	TASK_PRI_LEVEL_6	,	task_game			},
+	// {AC_TASK_SNAKE_ID			,	TASK_PRI_LEVEL_5	,	task_snake			},
 
 	#if defined(TASK_ZIGBEE_EN)
 	{AC_TASK_ZIGBEE_ID			,	TASK_PRI_LEVEL_4	,	task_zigbee			},

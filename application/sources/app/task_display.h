@@ -3,8 +3,10 @@
 
 #include "screen_manager.h"
 #include "scr_startup.h"
-#include "scr_timer.h"
-#include "scr_timer_setting.h"
+#include "scr_gameplay.h"
+#include "scr_menu.h"
+#include "scr_gamemap.h"
+#include "scr_config.h"
 
 #define LCD_WIDTH			(124)
 #define LCD_HEIGHT			(60)

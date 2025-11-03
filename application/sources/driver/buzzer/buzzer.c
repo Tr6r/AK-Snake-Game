@@ -2,7 +2,6 @@
 #include <stm32l1xx_gpio.h>
 #include <misc.h>
 #include <buzzer.h>
-
 volatile       uint32_t          _beep_duration;
 volatile       bool              _tones_playing;
 volatile const Tone_TypeDef     *_tones;
@@ -130,7 +129,10 @@ void BUZZER_Disable(void) {
 // input:
 //   tones - pointer to tones array
 void BUZZER_PlayTones(const Tone_TypeDef * tones) {
+	
 	_tones = tones;
 	_tones_playing = true;
 	BUZZER_Enable(_tones->frequency,_tones->duration);
+	
+	
 }

@@ -1,7 +1,0 @@
-sources/common/container/log.c:4:6:init_log_ring_buffer	0	static
-sources/common/container/log.c:15:6:print_time_sec	4	static
-sources/common/container/log.c:22:9:ring_buffer_put_log	20	static
-sources/common/container/log.c:73:6:ring_buffer_print_logs	48	static
-sources/common/container/log.c:129:6:log_buffer_to_eeprom	16	static
-sources/common/container/log.c:160:6:print_logs_from_eeprom	16	static
-sources/common/container/log.c:187:6:log_clear_eeprom	8	static

@@ -1,8 +1,0 @@
-sources/driver/rtc/rtc.c:6:6:init	24	static
-sources/driver/rtc/rtc.c:38:6:rtc_init_instance	24	static
-sources/driver/rtc/rtc.c:97:6:rtc_enable_interrupt	24	static
-sources/driver/rtc/rtc.c:135:6:rtc_set_alarm_1hz	24	static
-sources/driver/rtc/rtc.c:157:6:rtc_alarm_irq_init	24	static
-sources/driver/rtc/rtc.c:177:6:rtc_get_time	16	static
-sources/driver/rtc/rtc.c:187:10:rtc_get_time_uint32_sec	16	static
-sources/driver/rtc/rtc.c:194:6:rtc_set_time	16	static

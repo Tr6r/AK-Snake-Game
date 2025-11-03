@@ -271,6 +271,7 @@ void sys_dbg_fatal(const int8_t* s, uint8_t c) {
 		sys_ctrl_delay_us(200000);
 		led_life_off();
 		sys_ctrl_delay_us(200000);
+
 	}
 }
 

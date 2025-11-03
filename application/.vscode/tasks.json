@@ -18,18 +18,18 @@
                 "reveal": "silent"
             }
         },
-        {
-            "label": "flash",
-            "type": "shell",
-            "command": "make",
-            "args": ["flash"],
-            "options": {
-                "cwd": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application"
-            },
-            "problemMatcher": [],
-            "presentation": {
-                "reveal": "always"
-            }
-        }
+        // {
+        //     "label": "flash",
+        //     "type": "shell",
+        //     "command": "make",
+        //     "args": ["flash"],
+        //     "options": {
+        //         "cwd": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application"
+        //     },
+        //     "problemMatcher": [],
+        //     "presentation": {
+        //         "reveal": "always"
+        //     }
+        // }
     ]
 }

@@ -1,3 +1,0 @@
-sources/networks/rf_protocols/rf24/nwk/nrf_mac.cpp:313:6:void set_mac_rev_state(mac_rev_state_e)	0	static
-sources/networks/rf_protocols/rf24/nwk/nrf_mac.cpp:298:6:void set_mac_send_state(mac_send_state_e)	8	static
-sources/networks/rf_protocols/rf24/nwk/nrf_mac.cpp:94:6:void task_rf24_mac(ak_msg_t*)	40	static

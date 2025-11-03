@@ -1,7 +1,6 @@
 #include "scr_startup.h"
 #include "view_render.h"
 #include "view_item.h"
-
 static void view_scr_startup();
 static void app_init_screen();
 
@@ -49,15 +48,19 @@ void scr_startup_handle(ak_msg_t* msg) {
 		view_render.initialize();
 		view_render_display_on();
 		// timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_LOGO, AC_DISPLAY_STARTUP_INTERVAL, TIMER_ONE_SHOT);
-		SCREEN_TRAN(scr_timer_handle, &scr_timer);
+		// SCREEN_TRAN(scr_gamemap_handle, &scr_gamemap);
+		// SCREEN_TRAN(scr_config_handle, &scr_config);
+		SCREEN_TRAN(scr_menu_handle, &scr_menu);
+		// task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_INIT);
+
+		// SCREEN_TRAN(scr_gameplay_handle, &scr_gameplay);
+
 
 	}
 		break;
 
 	case AC_DISPLAY_BUTON_MODE_RELEASED: {
 		APP_DBG_SIG("AC_DISPLAY_BUTON_MODE_RELEASED0000\n");
-		timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE);
-				SCREEN_TRAN(scr_timer_handle, &scr_timer);
 		
 	}
 		break;

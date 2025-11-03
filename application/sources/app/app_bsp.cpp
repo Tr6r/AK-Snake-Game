@@ -1,7 +1,7 @@
 #include "button.h"
 
 #include "sys_dbg.h"
-
+#include "game.h"
 #include "app.h"
 #include "app_bsp.h"
 #include "app_dbg.h"
@@ -10,90 +10,124 @@
 #include "task_list.h"
 #include "task_list_if.h"
 
-#include "view_item.h"       // chứa view_screen_t, view_rectangle_t, ITEM_NULL, NUMBER_SCREEN_ITEMS_MAX,...
-#include "task_display.h"    // chứa AC_TASK_DISPLAY_ID
-#include "ak.h"              // chứa task_post_pure_msg()
+#include "view_item.h"	  // chứa view_screen_t, view_rectangle_t, ITEM_NULL, NUMBER_SCREEN_ITEMS_MAX,...
+#include "task_display.h" // chứa AC_TASK_DISPLAY_ID
+#include "ak.h"			  // chứa task_post_pure_msg()
 #include "screen_manager.h"
-
 
 button_t btn_mode;
 button_t btn_up;
 button_t btn_down;
 
-void btn_mode_callback(void* b) {
-	button_t* me_b = (button_t*)b;
-	switch (me_b->state) {
-	case BUTTON_SW_STATE_PRESSED: {
-		APP_DBG("[btn_mode_callback] BUTTON_SW_STATE_PRESSED\n");
-	}
-		break;
+void btn_mode_callback(void *b)
+{
+	button_t *me_b = (button_t *)b;
+	switch (me_b->state)
+	{
+	case BUTTON_SW_STATE_PRESSED:
+	{
+		// task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_PRESS);
+				task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_PRESS);
 
-	case BUTTON_SW_STATE_LONG_PRESSED: {
+	}
+	break;
+
+	case BUTTON_SW_STATE_LONG_PRESSED:
+	{
 		APP_DBG("[btn_mode_callback] BUTTON_SW_STATE_LONG_PRESSED\n");
-		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_LONG_RELEASED);
+		if(game.gameGetState()!= GAME_STATE_PLAYING)
+		{
 
+			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_LONG_RELEASED);
+		}
 	}
-		break;
+	break;
 
-	case BUTTON_SW_STATE_RELEASED: {
+	case BUTTON_SW_STATE_RELEASED:
+	{
 		APP_DBG("[btn_mode_callback] BUTTON_SW_STATE_RELEASED\n");
-            task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_RELEASED);
-		
+		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_RELEASED);
 	}
-		break;
+	break;
 
 	default:
 		break;
 	}
 }
 
-void btn_up_callback(void* b) {
-	button_t* me_b = (button_t*)b;
-	switch (me_b->state) {
-	case BUTTON_SW_STATE_PRESSED: {
-		APP_DBG("[btn_up_callback] BUTTON_SW_STATE_PRESSED\n");
+void btn_up_callback(void *b)
+{
+	button_t *me_b = (button_t *)b;
+	switch (me_b->state)
+	{
+	case BUTTON_SW_STATE_PRESSED:
+	{
+		// APP_DBG("[btn_up_callback] BUTTON_SW_STATE_PRESSED\n");
+		if (game.gameGetState() == GAME_STATE_MENU)
+		{
 
+			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_UP_PRESS);
+		}
+		else if (game.gameGetState() == GAME_STATE_PLAYING)
+
+		{
+			task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_BUTON_UP_PRESS);
+		}
 	}
-		break;
+	break;
 
-	case BUTTON_SW_STATE_LONG_PRESSED: {
-		APP_DBG("[btn_up_callback] BUTTON_SW_STATE_LONG_PRESSED\n");
-		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_UP_LONG_RELEASED);
-
+	case BUTTON_SW_STATE_LONG_PRESSED:
+	{
+		// APP_DBG("[btn_up_callback] BUTTON_SW_STATE_LONG_PRESSED\n");
+		// task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_UP_LONG_RELEASED);
 	}
-		break;
+	break;
 
-	case BUTTON_SW_STATE_RELEASED: {
-		APP_DBG("[btn_up_callback] BUTTON_SW_STATE_RELEASED\n");
-		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_UP_RELEASED);
+	case BUTTON_SW_STATE_RELEASED:
+	{
+		// APP_DBG("[btn_up_callback] BUTTON_SW_STATE_RELEASED\n");
 	}
-		break;
+	break;
 
 	default:
 		break;
 	}
 }
 
-void btn_down_callback(void* b) {
-	button_t* me_b = (button_t*)b;
-	switch (me_b->state) {
-	case BUTTON_SW_STATE_PRESSED: {
-		APP_DBG("[btn_down_callback] BUTTON_SW_STATE_PRESSED\n");
-	}
-		break;
+void btn_down_callback(void *b)
+{
+	button_t *me_b = (button_t *)b;
+	switch (me_b->state)
+	{
+	case BUTTON_SW_STATE_PRESSED:
+	{
+		// APP_DBG("[btn_down_callback] BUTTON_SW_STATE_PRESSED\n");
+		if (game.gameGetState() == GAME_STATE_MENU)
+		{
 
-	case BUTTON_SW_STATE_LONG_PRESSED: {
+			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_DOWN_PRESS);
+		}
+		else if (game.gameGetState() == GAME_STATE_PLAYING)
+
+		{
+		task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_BUTON_DOWN_PRESS);
+		}
+	}
+	break;
+
+	case BUTTON_SW_STATE_LONG_PRESSED:
+	{
 		APP_DBG("[btn_down_callback] BUTTON_SW_STATE_LONG_PRESSED\n");
-		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_DOWN_LONG_RELEASED);
-
+		// task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_DOWN_LONG_RELEASED);
 	}
-		break;
+	break;
 
-	case BUTTON_SW_STATE_RELEASED: {
-		APP_DBG("[btn_down_callback] BUTTON_SW_STATE_RELEASED\n");
-		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_DOWN_RELEASED);
+	case BUTTON_SW_STATE_RELEASED:
+	{
+		// APP_DBG("[btn_down_callback] BUTTON_SW_STATE_RELEASED\n");
+		// task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_DOWN_RELEASED);
 	}
-		break;
+	break;
 
 	default:
 		break;

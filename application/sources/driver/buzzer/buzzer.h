@@ -27,7 +27,32 @@ static const Tone_TypeDef tones_startup[] = {
 	{4500,6},
 	{   0,0}     // <-- tones end
 };
-
+static const Tone_TypeDef tones_snake_move[] = {
+    {3500, 1}, {0, 1}, {0, 0}  // bíp rất ngắn, cao tần
+};
+static const Tone_TypeDef tones_snake_eat[] = {
+    {800, 2}, {1200, 3}, {0, 0}  // âm tăng tần
+};
+static const Tone_TypeDef tones_snake_crash[] = {
+    {1000, 3}, {0, 1}, {700, 4}, {0, 1}, {400, 6}, {0, 0}
+};
+static const Tone_TypeDef tones_menu_click[] = {
+    {3000, 2}, {0, 2}, {0, 0} // bíp ngắn
+};
+static const Tone_TypeDef tones_snake_turn[] = {
+    {2800, 1}, {0, 1}, {2200, 1}, {0, 0}
+};
+static const Tone_TypeDef tones_menu_select[] = {
+    {1000, 2}, {0, 1}, {2000, 3}, {0, 0} // bíp đôi khác nhau (chọn OK)
+};
+static const Tone_TypeDef tones_snake_init[] = {
+    {1200, 3},
+    {0, 2},
+    {1600, 3},
+    {0, 2},
+    {2000, 5},
+    {0, 0}
+};
 static const Tone_TypeDef tones_3beep[] = {
 	{4000, 3},
 	{   0,10},
