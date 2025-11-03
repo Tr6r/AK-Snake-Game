@@ -36,7 +36,6 @@
 #include "app_non_clear_ram.h"
 
 #include "task_list.h"
-#include "task_shell.h"
 #include "task_life.h"
 #include "task_uart_if.h"
 #include "task_display.h"
@@ -144,7 +143,6 @@ int main_app() {
 	/* life led init */
 	led_init(&led_life, led_life_init, led_life_on, led_life_off);
 
-	ring_buffer_char_init(&ring_buffer_console_rev, buffer_console_rev, BUFFER_CONSOLE_REV_SIZE);
 
 	/* button init */
 	button_init(&btn_mode,	10,	BUTTON_MODE_ID,	io_button_mode_init,	io_button_mode_read,	btn_mode_callback);

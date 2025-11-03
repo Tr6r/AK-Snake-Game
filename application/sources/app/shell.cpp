@@ -33,7 +33,6 @@
 #include "app_non_clear_ram.h"
 #include "app_modbus_pull.h"
 
-#include "task_shell.h"
 #include "task_list.h"
 #include "task_list_if.h"
 #include "task_if.h"

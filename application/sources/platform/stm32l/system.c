@@ -402,10 +402,10 @@ void svc_exe(uint32_t* svc_args) {
 void uart1_irq() {
 	task_entry_interrupt();
 
-	if (USART_GetITStatus(USARTx, USART_IT_RXNE) == SET) {
-		/* DO NOT clear pending interrupt right here ! */
-		sys_irq_shell();
-	}
+	// if (USART_GetITStatus(USARTx, USART_IT_RXNE) == SET) {
+	// 	/* DO NOT clear pending interrupt right here ! */
+	// 	sys_irq_shell();
+	// }
 
 	if (USART_GetITStatus(USARTx, USART_IT_TXE) == SET) {
 		USART_ClearITPendingBit(USARTx, USART_IT_TXE);
