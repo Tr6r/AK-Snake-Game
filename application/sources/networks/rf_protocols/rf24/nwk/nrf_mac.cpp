@@ -24,7 +24,6 @@
 #include "sys_dbg.h"
 
 #include "task_list.h"
-#include "task_list_if.h"
 
 #include "nrf_config.h"
 #include "nrf_data.h"

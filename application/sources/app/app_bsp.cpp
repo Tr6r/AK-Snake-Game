@@ -8,7 +8,6 @@
 #include "app_if.h"
 
 #include "task_list.h"
-#include "task_list_if.h"
 
 #include "view_item.h"	  // chứa view_screen_t, view_rectangle_t, ITEM_NULL, NUMBER_SCREEN_ITEMS_MAX,...
 #include "task_display.h" // chứa AC_TASK_DISPLAY_ID
