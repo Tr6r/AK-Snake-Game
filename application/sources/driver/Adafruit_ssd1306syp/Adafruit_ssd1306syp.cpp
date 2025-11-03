@@ -1,7 +1,6 @@
 #include "Adafruit_ssd1306syp.h"
 
 #if defined (STM32L_PLATFORM)
-#include "Arduino.h"
 #include "io_cfg.h"
 #endif
 

@@ -5,3 +5,5 @@ include sources/driver/flash/Makefile.mk
 include sources/driver/led/Makefile.mk
 include sources/driver/gpio/Makefile.mk
 include sources/driver/buzzer/Makefile.mk
+include sources/driver/buzzer/Makefile.mk
+include sources/driver/SPI/Makefile.mk
