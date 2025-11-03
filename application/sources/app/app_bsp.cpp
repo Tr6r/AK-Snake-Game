@@ -27,15 +27,14 @@ void btn_mode_callback(void *b)
 	case BUTTON_SW_STATE_PRESSED:
 	{
 		// task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_PRESS);
-				task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_PRESS);
-
+		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_PRESS);
 	}
 	break;
 
 	case BUTTON_SW_STATE_LONG_PRESSED:
 	{
 		APP_DBG("[btn_mode_callback] BUTTON_SW_STATE_LONG_PRESSED\n");
-		if(game.gameGetState()!= GAME_STATE_PLAYING)
+		if (game.gameGetState() != GAME_STATE_PLAYING)
 		{
 
 			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_BUTON_MODE_LONG_RELEASED);
@@ -71,7 +70,14 @@ void btn_up_callback(void *b)
 		else if (game.gameGetState() == GAME_STATE_PLAYING)
 
 		{
-			task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_BUTON_UP_PRESS);
+			if (game.snakeGetState() == SNAKE_STATE_MOVING)
+			{
+				game.ignore_update = true;
+
+				game.snakeChangeState(SNAKE_STATE_TURNING);
+				game.snakeTurnLeft();
+				game.snakeChangeState(SNAKE_STATE_MOVING);
+			}
 		}
 	}
 	break;
@@ -110,7 +116,14 @@ void btn_down_callback(void *b)
 		else if (game.gameGetState() == GAME_STATE_PLAYING)
 
 		{
-		task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_BUTON_DOWN_PRESS);
+			if (game.snakeGetState() == SNAKE_STATE_MOVING)
+			{
+				game.ignore_update = true;
+
+				game.snakeChangeState(SNAKE_STATE_TURNING);
+				game.snakeTurnRight();
+				game.snakeChangeState(SNAKE_STATE_MOVING);
+			}
 		}
 	}
 	break;

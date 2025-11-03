@@ -40,7 +40,6 @@
 #include "task_life.h"
 #include "task_uart_if.h"
 #include "task_display.h"
-#include "task_game.h"
 
 /* sys include */
 #include "sys_boot.h"

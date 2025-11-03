@@ -53,7 +53,7 @@ void sys_irq_nrf24l01() {
 		break;
 
 	case (1 << HAL_NRF_TX_DS): { /* Packet sent */
-		task_post_pure_msg(AC_RF24_PHY_ID, AC_RF24_PHY_IRQ_TX_DS);
+		// task_post_pure_msg(AC_RF24_PHY_ID, AC_RF24_PHY_IRQ_TX_DS);
 	}
 		break;
 
@@ -145,7 +145,7 @@ void task_rf24_phy(ak_msg_t* msg) {
 
 	case AC_RF24_PHY_IRQ_TX_DS: {
 		NRF_DBG_SIG("AC_RF24_PHY_IRQ_TX_DS\n");
-		task_post_pure_msg(AC_RF24_MAC_ID, AC_RF24_MAC_SEND_FRAME_DONE);
+		// task_post_pure_msg(AC_RF24_MAC_ID, AC_RF24_MAC_SEND_FRAME_DONE);
 	}
 		break;
 

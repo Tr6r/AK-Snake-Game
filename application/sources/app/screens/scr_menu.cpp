@@ -238,7 +238,7 @@ void scr_menu_handle(ak_msg_t *msg)
 
         if (menu_index == 0)
         {
-            timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
+            // timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
             // task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_INIT);
 
             SCREEN_TRAN(scr_gamemap_handle, &scr_gamemap);
@@ -246,7 +246,7 @@ void scr_menu_handle(ak_msg_t *msg)
         }
         else
         {
-            timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
+            // timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
 
             SCREEN_TRAN(scr_config_handle, &scr_config);
         }

@@ -1,7 +1,5 @@
 #include "scr_gameplay.h"
 #include "game.h"
-#include "task_game.h"
-
 
 #include <functional>
 using namespace std;
@@ -132,10 +130,10 @@ void renderSnake()
 void checkHighestScore()
 {
     const uint16_t newScore = game.gameGetScore();
-    
+
     const uint8_t idx = gameMap.currentMap;
     const uint16_t topScore = game.gameCfg.highScore[idx];
-    
+
     if (newScore > topScore)
     {
         game.gameCfg.highScore[idx] = newScore;
@@ -218,7 +216,7 @@ void view_scr_gameplay()
 
     if (game.gameGetState() == GAME_STATE_GAMEOVER)
     {
-        timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
+        timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE);
 
         checkHighestScore();
 
@@ -253,8 +251,10 @@ void scr_gameplay_handle(ak_msg_t *msg)
     {
     case SCREEN_ENTRY:
         APP_DBG_SIG("SCREEN_ENTRY (gamelay)\n");
-        task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_START);
+        game.gameChangeState(GAME_STATE_PLAYING);
+        xprintf("snake speedddd: %d\n", game.snakeGetSpeed());
 
+        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
         break;
     case AC_DISPLAY_SHOW_MENU:
 
@@ -263,12 +263,35 @@ void scr_gameplay_handle(ak_msg_t *msg)
         break;
 
     case AC_DISPLAY_BUTON_MODE_PRESS:
-        task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_PAUSE);
+        if (game.gameGetState() == GAME_STATE_PLAYING)
+        {
+            game.gameChangeState(GAME_STATE_PAUSE);
+            timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE);
+        }
+        else
+        {
+            game.gameChangeState(GAME_STATE_PLAYING);
+            xprintf("snake speedddd: %d\n", game.snakeGetSpeed());
 
+            timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
+        }
 
-    break;
-    case AC_DISPLAY_UPDATE:
-        // APP_DBG_SIG("SCREEN_UPDATE\n");
+        break;
+
+    case AC_GAME_BUTON_UP_PRESS:
+        xprintf("OK\n");
+
+        
+
+        break;
+
+    case AC_GAME_BUTON_DOWN_PRESS:
+        xprintf("OK\n");
+
+        
+
+        break;
+    case AC_DISPLAY_SNAKE_UPDATE:
 
         apple_blink_count++;
         frame_count++;
@@ -284,11 +307,7 @@ void scr_gameplay_handle(ak_msg_t *msg)
             frame_count = 0;
             fps_timer = 0;
         }
-
         game.snakeUpdate();
-
-        // task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_UPDATE);
-        //     task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_UPDATE);
 
         break;
 

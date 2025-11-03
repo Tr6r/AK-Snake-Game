@@ -173,13 +173,14 @@ void scr_gamemap_handle(ak_msg_t *msg)
         gameMap.animOffsetX = 0;
         gameMap.currentMap = 0;
 
-        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
+        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
     }
     break;
 
     case AC_DISPLAY_BUTON_MODE_PRESS:
     {
         game.gameInit(gameMap.currentMap);
+        // timer_remove_attr(AC_TASK_DISPLAY_ID,AC_DISPLAY_UPDATE);
         SCREEN_TRAN(scr_gameplay_handle, &scr_gameplay);
     }
     break;
