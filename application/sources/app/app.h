@@ -23,7 +23,6 @@ extern "C"
 #include "app_data.h"
 #include "app_rf24.h"
 #include "rtc.h"
-#include "log.h"
 /*****************************************************************************/
 /* SYSTEM task define
  */

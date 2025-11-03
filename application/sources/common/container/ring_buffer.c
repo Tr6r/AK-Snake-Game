@@ -3,7 +3,6 @@
 
 #include "ring_buffer.h"
 #include "sys_dbg.h"
-#include "task_log.h"
 #include "ak.h"
 #include "xprintf.h"
 void ring_buffer_init(ring_buffer_t *ring_buffer, void *buffer, uint16_t buffer_size, uint16_t element_size)

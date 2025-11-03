@@ -13,7 +13,6 @@
 #include "app.h"
 #include "app_dbg.h"
 #include "task_list.h"
-#include "task_log.h"
 
 
 #include "task_display.h"
