@@ -37,7 +37,6 @@
 
 #include "task_list.h"
 #include "task_life.h"
-#include "task_uart_if.h"
 #include "task_display.h"
 
 /* sys include */
