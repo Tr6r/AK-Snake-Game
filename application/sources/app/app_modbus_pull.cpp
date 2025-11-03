@@ -15,7 +15,6 @@
 #include "app_bsp.h"
 #include "app_flash.h"
 #include "app_data.h"
-#include "app_non_clear_ram.h"
 #include "app_modbus_pull.h"
 
 /* sys include */

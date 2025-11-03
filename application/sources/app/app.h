@@ -21,7 +21,6 @@ extern "C"
 #include "app_if.h"
 #include "app_eeprom.h"
 #include "app_data.h"
-#include "app_rf24.h"
 #include "rtc.h"
 /*****************************************************************************/
 /* SYSTEM task define

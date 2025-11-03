@@ -33,7 +33,6 @@
 #include "app_dbg.h"
 #include "app_bsp.h"
 #include "app_flash.h"
-#include "app_non_clear_ram.h"
 
 #include "task_list.h"
 #include "task_life.h"
@@ -99,8 +98,6 @@ int main_app() {
 			, app_info.version[2]	\
 			, app_info.version[3]);
 
-	sys_soft_reboot_counter++;
-
 	/******************************************************************************
 	* init active kernel
 	*******************************************************************************/
@@ -156,12 +153,7 @@ int main_app() {
 	BUZZER_Init();
 	// BUZZER_PlayTones(tones_startup);
 
-	/* get boot share data */
-	flash_read(APP_FLASH_INTTERNAL_SHARE_DATA_SECTOR_1, reinterpret_cast<uint8_t*>(&boot_app_share_data), sizeof(boot_app_share_data_t));
-	if (boot_app_share_data.is_power_on_reset == SYS_POWER_ON_RESET) {
-		app_power_on_reset();
-	}
-
+	
 	/* increase start time */
 	fatal_log_t app_fatal_log;
 	flash_read(APP_FLASH_AK_DBG_FATAL_LOG_SECTOR, reinterpret_cast<uint8_t*>(&app_fatal_log), sizeof(fatal_log_t));
@@ -241,14 +233,4 @@ void sys_irq_timer_10ms() {
 	button_timer_polling(&btn_mode);
 	button_timer_polling(&btn_up);
 	button_timer_polling(&btn_down);
-}
-
-/* init non-clear RAM objects
- */
-void app_power_on_reset() {
-	sys_soft_reboot_counter = 0;
-}
-
-void* app_get_boot_share_data() {
-	return static_cast<void*>(&boot_app_share_data);
 }
