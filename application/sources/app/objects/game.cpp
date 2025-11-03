@@ -1,6 +1,7 @@
 #include "game.h"
 #include "xprintf.h"
 #include "app_eeprom.h"
+#include "eeprom.h"
 Game game;
 
 Game::Game()

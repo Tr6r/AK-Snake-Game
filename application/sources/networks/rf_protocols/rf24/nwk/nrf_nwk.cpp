@@ -162,36 +162,36 @@ void nrf_nwk_fsm_idle(ak_msg_t* msg) {
 		NRF_DBG("nrf_nwk_hdr.payload_len: %d\n", st_nrf_nwk_msg->hdr.payload_len);
 
 		switch (st_nrf_nwk_msg->hdr.type) {
-		case RF24_MSG_TYPE_PURE: {
-			ak_msg_pure_if_t* if_msg = (ak_msg_pure_if_t*)st_nrf_nwk_msg->payload;
+		// case RF24_MSG_TYPE_PURE: {
+		// 	ak_msg_pure_if_t* if_msg = (ak_msg_pure_if_t*)st_nrf_nwk_msg->payload;
 
-			ak_msg_t* s_msg = get_pure_msg();
-			set_if_src_task_id(s_msg, if_msg->header.src_task_id);
-			set_if_des_task_id(s_msg, if_msg->header.des_task_id);
-			set_if_src_type(s_msg, if_msg->header.if_src_type);
-			set_if_des_type(s_msg, if_msg->header.if_des_type);
-			set_if_sig(s_msg, if_msg->header.sig);
+		// 	ak_msg_t* s_msg = get_pure_msg();
+		// 	set_if_src_task_id(s_msg, if_msg->header.src_task_id);
+		// 	set_if_des_task_id(s_msg, if_msg->header.des_task_id);
+		// 	set_if_src_type(s_msg, if_msg->header.if_src_type);
+		// 	set_if_des_type(s_msg, if_msg->header.if_des_type);
+		// 	set_if_sig(s_msg, if_msg->header.sig);
 
-			set_msg_sig(s_msg, AC_RF24_IF_PURE_MSG_IN);
-			task_post(AC_TASK_RF24_IF_ID, s_msg);
-		}
-			break;
+		// 	set_msg_sig(s_msg, AC_RF24_IF_PURE_MSG_IN);
+		// 	task_post(AC_TASK_RF24_IF_ID, s_msg);
+		// }
+		// 	break;
 
-		case RF24_MSG_TYPE_COMMON: {
-			ak_msg_common_if_t* if_msg = (ak_msg_common_if_t*)st_nrf_nwk_msg->payload;
+		// case RF24_MSG_TYPE_COMMON: {
+		// 	ak_msg_common_if_t* if_msg = (ak_msg_common_if_t*)st_nrf_nwk_msg->payload;
 
-			ak_msg_t* s_msg = get_common_msg();
-			set_if_src_task_id(s_msg, if_msg->header.src_task_id);
-			set_if_des_task_id(s_msg, if_msg->header.des_task_id);
-			set_if_src_type(s_msg, if_msg->header.if_src_type);
-			set_if_des_type(s_msg, if_msg->header.if_des_type);
-			set_if_sig(s_msg, if_msg->header.sig);
-			set_if_data_common_msg(s_msg, if_msg->data, if_msg->len);
+		// 	ak_msg_t* s_msg = get_common_msg();
+		// 	set_if_src_task_id(s_msg, if_msg->header.src_task_id);
+		// 	set_if_des_task_id(s_msg, if_msg->header.des_task_id);
+		// 	set_if_src_type(s_msg, if_msg->header.if_src_type);
+		// 	set_if_des_type(s_msg, if_msg->header.if_des_type);
+		// 	set_if_sig(s_msg, if_msg->header.sig);
+		// 	set_if_data_common_msg(s_msg, if_msg->data, if_msg->len);
 
-			set_msg_sig(s_msg, AC_RF24_IF_COMMON_MSG_IN);
-			task_post(AC_TASK_RF24_IF_ID, s_msg);
-		}
-			break;
+		// 	set_msg_sig(s_msg, AC_RF24_IF_COMMON_MSG_IN);
+		// 	task_post(AC_TASK_RF24_IF_ID, s_msg);
+		// }
+		// 	break;
 
 		case RF24_MSG_TYPE_DYNAMIC: {
 		}
