@@ -34,29 +34,7 @@ extern "C"
 		SYSTEM_AK_FLASH_UPDATE_REQ = AK_USER_DEFINE_SIG,
 	};
 
-/*****************************************************************************/
-/* FIRMWARE task define
- */
-/*****************************************************************************/
-/* define timer */
-#define FW_PACKED_TIMEOUT_INTERVAL (5000)
-#define FW_UPDATE_REQ_INTERVAL (5000)
 
-	/* define signal */
-	enum
-	{
-		FW_CRENT_APP_FW_INFO_REQ = AK_USER_DEFINE_SIG,
-		FW_CRENT_BOOT_FW_INFO_REQ,
-		FW_UPDATE_REQ,
-		FW_UPDATE_SM_OK,
-		FW_TRANSFER_REQ,
-		FW_INTERNAL_UPDATE_APP_RES_OK,
-		FW_INTERNAL_UPDATE_BOOT_RES_OK,
-		FW_SAFE_MODE_RES_OK,
-		FW_UPDATE_SM_BUSY,
-		FW_PACKED_TIMEOUT,
-		FW_CHECKING_REQ
-	};
 
 /*****************************************************************************/
 /*  LIFE task define
@@ -69,19 +47,6 @@ extern "C"
 	enum
 	{
 		AC_LIFE_SYSTEM_CHECK = AK_USER_DEFINE_SIG,
-	};
-
-	/*****************************************************************************/
-	/*  SHELL task define
-	 */
-	/*****************************************************************************/
-	/* define timer */
-
-	/* define signal */
-	enum
-	{
-		AC_SHELL_LOGIN_CMD = AK_USER_DEFINE_SIG,
-		AC_SHELL_REMOTE_CMD,
 	};
 
 	/*****************************************************************************/
@@ -109,7 +74,7 @@ extern "C"
 	/* define signal */
 	enum
 	{
-		AC_GAME_INIT =AK_USER_DEFINE_SIG,
+		AC_GAME_INIT = AK_USER_DEFINE_SIG,
 		AC_GAME_START,
 		AC_GAME_PAUSE,
 		AC_GAME_OVER,
@@ -133,58 +98,6 @@ extern "C"
 		AC_SNAKE_MOVE,		 // tick update rắn (gọi định kỳ)
 		AC_SNAKE_TURN_LEFT,	 // xoay trái
 		AC_SNAKE_TURN_RIGHT, // xoay phải
-		AC_SNAKE_DIE,		 // game over (tuỳ chọn)
-		AC_SNAKE_EAT,		 // ăn mồi (tuỳ chọn)
-	};
-
-	/*****************************************************************************/
-	/*  RF24 task define
-	 */
-	/*****************************************************************************/
-	/* private define */
-	/* define timer */
-	/* define signal */
-	enum
-	{
-		AC_RF24_IF_INIT_NETWORK = AK_USER_DEFINE_SIG,
-		AC_RF24_IF_PURE_MSG_OUT,
-		AC_RF24_IF_COMMON_MSG_OUT,
-		AC_RF24_IF_PURE_MSG_IN,
-		AC_RF24_IF_COMMON_MSG_IN
-	};
-
-	/*****************************************************************************/
-	/* IF task define
-	 */
-	/*****************************************************************************/
-	/* define timer */
-	/* define signal */
-	enum
-	{
-		AC_IF_PURE_MSG_IN = AK_USER_DEFINE_SIG,
-		AC_IF_PURE_MSG_OUT,
-		AC_IF_COMMON_MSG_IN,
-		AC_IF_COMMON_MSG_OUT,
-		AC_IF_DYNAMIC_MSG_IN,
-		AC_IF_DYNAMIC_MSG_OUT,
-	};
-
-	/*****************************************************************************/
-	/* UART_IF task define
-	 */
-	/*****************************************************************************/
-	/* timer signal */
-	/* define signal */
-
-	enum
-	{
-		AC_UART_IF_INIT = AK_USER_DEFINE_SIG,
-		AC_UART_IF_PURE_MSG_OUT,
-		AC_UART_IF_COMMON_MSG_OUT,
-		AC_UART_IF_DYNAMIC_MSG_OUT,
-		AC_UART_IF_PURE_MSG_IN,
-		AC_UART_IF_COMMON_MSG_IN,
-		AC_UART_IF_DYNAMIC_MSG_IN,
 	};
 
 /*****************************************************************************/
@@ -194,12 +107,6 @@ extern "C"
 /* define timer */
 #define AC_DISPLAY_INITIAL_INTERVAL (100)
 #define AC_DISPLAY_STARTUP_INTERVAL (2000)
-#define AC_DISPLAY_LOGO_INTERVAL (10000)
-#define AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE_INTERAL (150)
-#define AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SNOW_MOVING_UPDATE_INTERAL (150)
-#define AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SLEEP_INTERVAL (15000)
-#define AC_DISPLAY_SHOW_MODBUS_PULL_INTERVAL (1500)
-#define AC_DISPLAY_SHOW_MODBUS_PULL_SLEEP_INTERVAL (30000)
 
 	/* define signal */
 	enum
@@ -215,26 +122,13 @@ extern "C"
 		AC_DISPLAY_BUTON_MODE_LONG_RELEASED,
 		AC_DISPLAY_BUTON_DOWN_RELEASED,
 		AC_DISPLAY_SHOW_LOGO,
-		AC_DISPLAY_SHOW_IDLE,
-		AC_DISPLAY_SHOW_IDLE_BALL_MOVING_UPDATE,
-		AC_DISPLAY_SHOW_FW_UPDATE,
-		AC_DISPLAY_SHOW_FW_UPDATE_ERR,
-		AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SNOW_MOVING_UPDATE,
-		AC_DISPLAY_SHOW_MERRY_CHRISTMAS_SLEEP,
-		AC_DISPLAY_SHOW_MODBUS_PULL_UPDATE,
-		AC_DISPLAY_SHOW_MODBUS_PULL_SLEEP,
-		AC_DISPLAY_SHOW_TIMER,
-		AC_DISPLAY_TIMER_UPDATE,
 		AC_DISPLAY_BLINK_UPDATE,
 		AC_DISPLAY_UPDATE,
 		AC_DISPLAY_SNAKE_UPDATE,
 		AC_DISPLAY_SHOW_MENU,
 		AC_DISPLAY_SHOW_SUCCESS,
-		AC_DISPLAY_TEST,
 
 	};
-
-	
 
 	/*****************************************************************************/
 	/* DBG task define

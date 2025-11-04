@@ -13,31 +13,6 @@
 /******************************************************************************
 * IF Type
 *******************************************************************************/
-/** RF24 interface for modules
- *
-*/
-#define IF_TYPE_RF24_MIN					(0)
-#define IF_TYPE_RF24_GW						(0)
-#define IF_TYPE_RF24_AC						(1)
-#define IF_TYPE_RF24_MAX					(99)
-
-#define IF_TYPE_RF24_ME						IF_TYPE_RF24_AC
-
-/** APP interface, communication via socket interface
- *
- */
-#define IF_TYPE_APP_MIN						(100)
-#define IF_TYPE_APP_GW						(100)
-#define IF_TYPE_APP_GI						(101)
-#define IF_TYPE_APP_MAX						(119)
-
-/** UART interface
- *
- */
-#define IF_TYPE_UART_GW_MIN					(120)
-#define IF_TYPE_UART_GW						(120)
-#define IF_TYPE_UART_AC						(121)
-#define IF_TYPE_UART_GW_MAX					(140)
 
 
 typedef struct {
