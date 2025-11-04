@@ -14,9 +14,6 @@ extern "C"
 #endif
 
 #include "ak.h"
-#if defined(IF_NETWORK_NRF24_EN)
-#include "nrf_nwk_sig.h"
-#endif
 
 #include "app_eeprom.h"
 #include "app_data.h"
@@ -33,8 +30,6 @@ extern "C"
 	{
 		SYSTEM_AK_FLASH_UPDATE_REQ = AK_USER_DEFINE_SIG,
 	};
-
-
 
 /*****************************************************************************/
 /*  LIFE task define
@@ -64,6 +59,19 @@ extern "C"
 		AC_LOG_PRINT_EEPROM,
 		AC_CLEAR_LOG_EEPROM
 	};
+	/*****************************************************************************/
+	/*  IDLE task define
+	 */
+	/*****************************************************************************/
+	/* define timer */
+
+	/* define signal */
+	enum
+	{
+		AC_IDLE_INIT = AK_USER_DEFINE_SIG,
+		AC_IDLE_RESET,
+		AC_IDLE_DEL,
+	};
 
 	/*****************************************************************************/
 	/*  GAME task define
@@ -83,21 +91,6 @@ extern "C"
 		AC_GAME_BUTON_DOWN_RELEASED,
 		AC_GAME_BUTON_UP_PRESS,
 		AC_GAME_BUTON_DOWN_PRESS
-	};
-	/*****************************************************************************/
-	/*  SNAKE task define
-	 */
-	/*****************************************************************************/
-	/* define timer */
-
-	/* define signal */
-	enum
-	{
-		AC_SNAKE = AK_USER_DEFINE_SIG,
-		AC_SNAKE_INIT,		 // tick update rắn (gọi định kỳ)
-		AC_SNAKE_MOVE,		 // tick update rắn (gọi định kỳ)
-		AC_SNAKE_TURN_LEFT,	 // xoay trái
-		AC_SNAKE_TURN_RIGHT, // xoay phải
 	};
 
 /*****************************************************************************/
@@ -127,6 +120,7 @@ extern "C"
 		AC_DISPLAY_SNAKE_UPDATE,
 		AC_DISPLAY_SHOW_MENU,
 		AC_DISPLAY_SHOW_SUCCESS,
+		AC_DISPLAY_SHOW_IDLE,
 
 	};
 

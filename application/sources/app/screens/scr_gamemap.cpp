@@ -170,17 +170,20 @@ void scr_gamemap_handle(ak_msg_t *msg)
         APP_DBG_SIG("SCREEN_ENTRY\n");
         gameMap.animating = false;
         gameMap.ignoreNav = true;
-        gameMap.animOffsetX = 0;
-        gameMap.currentMap = 0;
 
-        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
+        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
     }
     break;
 
     case AC_DISPLAY_BUTON_MODE_PRESS:
     {
+        // timer_remove_attr(AC_TASK_DISPLAY_ID,AC_DISPLAY_SHOW_IDLE);
+        task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_DEL);
+
+        timer_remove_attr(AC_TASK_DISPLAY_ID,AC_DISPLAY_UPDATE);
+        game.gameChangeState(GAME_STATE_PLAYING);
+
         game.gameInit(gameMap.currentMap);
-        // timer_remove_attr(AC_TASK_DISPLAY_ID,AC_DISPLAY_UPDATE);
         SCREEN_TRAN(scr_gameplay_handle, &scr_gameplay);
     }
     break;
@@ -189,6 +192,9 @@ void scr_gamemap_handle(ak_msg_t *msg)
     {
         if (!gameMap.animating)
         {
+            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+            task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
+
 
             if (game.getIsAudio())
                 BUZZER_PlayTones(tones_menu_click);
@@ -205,6 +211,10 @@ void scr_gamemap_handle(ak_msg_t *msg)
 
         if (!gameMap.animating)
         {
+            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+            task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
+
+
             if (game.getIsAudio())
                 BUZZER_PlayTones(tones_menu_click);
             gameMap.targetMap = (gameMap.currentMap - 1 + 4) % 4;
@@ -225,6 +235,7 @@ void scr_gamemap_handle(ak_msg_t *msg)
     }
 
     break;
+
     case AC_DISPLAY_BUTON_MODE_LONG_RELEASED:
     {
     }

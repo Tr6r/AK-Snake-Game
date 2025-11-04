@@ -174,25 +174,35 @@ void view_scr_menu()
     renderItem();
     renderScrollbar();
 }
+void initMenu()
+{
+    if (!gameMenu.isEeproomInit)
+    {
+        game.loadConfig();
+        gameMenu.isEeproomInit = true;
+        task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_INIT);
+        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+    }
+    gameMenu.anim_active = false;
+
+    game.gameChangeState(GAME_STATE_MENU);
+
+    timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
+}
 void scr_menu_handle(ak_msg_t *msg)
 {
     switch (msg->sig)
     {
     case SCREEN_ENTRY:
-        if (!gameMenu.isEeproomInit)
-        {
-            game.loadConfig();
-            gameMenu.isEeproomInit = true;
-        }
-        gameMenu.menu_index = 0;
-        gameMenu.anim_offset = 0;
-        gameMenu.anim_active = false;
-        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
+        initMenu();
         break;
 
     case AC_DISPLAY_BUTON_UP_PRESS:
         if (!gameMenu.anim_active && gameMenu.menu_index > 0)
         {
+            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+            task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
+
             if (game.getIsAudio())
 
                 BUZZER_PlayTones(tones_menu_click);
@@ -206,6 +216,9 @@ void scr_menu_handle(ak_msg_t *msg)
     case AC_DISPLAY_BUTON_DOWN_PRESS:
         if (!gameMenu.anim_active && gameMenu.menu_index < MENU_COUNT - 1)
         {
+            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+            task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
+
             if (game.getIsAudio())
 
                 BUZZER_PlayTones(tones_menu_click);
@@ -217,20 +230,26 @@ void scr_menu_handle(ak_msg_t *msg)
         break;
 
     case AC_DISPLAY_BUTON_MODE_PRESS:
+
         if (game.getIsAudio())
 
             BUZZER_PlayTones(tones_menu_select);
+        timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
+        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+        task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
         if (gameMenu.menu_index == 0)
         {
+            game.gameChangeState(GAME_STATE_CHOOSE_MAP);
+
             SCREEN_TRAN(scr_gamemap_handle, &scr_gamemap);
         }
         else
         {
+            game.gameChangeState(GAME_STATE_SETTING);
             SCREEN_TRAN(scr_config_handle, &scr_config);
         }
         break;
-
     case AC_DISPLAY_UPDATE:
         gameMenu.blinkCount++;
         if (gameMenu.blinkCount >= 8)

@@ -14,6 +14,7 @@ SOURCES_CPP += sources/app/app_bsp.cpp
 
 SOURCES_CPP += sources/app/task_life.cpp
 SOURCES_CPP += sources/app/task_list.cpp
+SOURCES_CPP += sources/app/task_idle.cpp
 SOURCES_CPP += sources/app/task_display.cpp
 
 SOURCES_CPP += sources/app/task_dbg.cpp

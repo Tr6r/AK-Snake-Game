@@ -64,6 +64,7 @@ void Game::saveConfig()
             gameCfg.audio,
             gameCfg.difficulty,
             gameCfg.snakeLen);
+            
     eeprom_write(EEPROM_START_ADDR, (uint8_t *)&gameCfg, sizeof(GameConfig));
 
     // tính checksum

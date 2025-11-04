@@ -7,7 +7,7 @@
 #include "scr_menu.h"
 #include "scr_gamemap.h"
 #include "scr_config.h"
-
+#include "scr_idle.h"
 #define LCD_WIDTH			(124)
 #define LCD_HEIGHT			(60)
 

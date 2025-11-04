@@ -206,7 +206,6 @@ void renderGameOver()
     sprintf(buf, "SCORE:%02d", game.gameGetScore());
     view_render.print(buf);
     view_render.fillRect(70, 54, 47, 1, WHITE);
-
 }
 void renderGameInfo()
 
@@ -239,6 +238,8 @@ void view_scr_gameplay()
 
     if (game.gameGetState() == GAME_STATE_GAMEOVER)
     {
+        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+        task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_INIT);
         renderGameOver();
     }
     else
@@ -258,7 +259,6 @@ void scr_gameplay_handle(ak_msg_t *msg)
     {
     case SCREEN_ENTRY:
         APP_DBG_SIG("SCREEN_ENTRY (gamelay)\n");
-        game.gameChangeState(GAME_STATE_PLAYING);
         timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
         break;
 
@@ -268,21 +268,19 @@ void scr_gameplay_handle(ak_msg_t *msg)
             game.gameChangeState(GAME_STATE_PAUSE);
             timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE);
         }
-        else if(game.gameGetState() == GAME_STATE_GAMEOVER)
+        else if (game.gameGetState() == GAME_STATE_GAMEOVER)
         {
-                    game.gameChangeState(GAME_STATE_MENU);
-        SCREEN_TRAN(scr_menu_handle, &scr_menu);
+            game.gameChangeState(GAME_STATE_MENU);
+            SCREEN_TRAN(scr_menu_handle, &scr_menu);
         }
-        else 
+        else
         {
             game.gameChangeState(GAME_STATE_PLAYING);
             timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
         }
 
         break;
-
     case AC_DISPLAY_SNAKE_UPDATE:
-
         gameplay.apple_blink_count++;
         gameplay.frame_count++;
         gameplay.fps_timer += 250;
