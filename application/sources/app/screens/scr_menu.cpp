@@ -8,17 +8,7 @@ static void view_scr_menu();
 
 // --- Cấu hình menu ---
 
-int menu_index = 0;
-int anim_offset = 0;
-bool anim_active = false;
-int anim_direction = 0; // +1: xuống, -1: lên
-uint8_t anim_speed = 10;
-bool isEeproomInit = false;
-bool isBlink = false;
-uint8_t blinkCount = 0;
-int arrowX = 5;
-int arrowY = 30; // giữa vùng (15–45)
-
+gameMenu_t gameMenu;
 // --- Đăng ký dynamic view ---
 view_dynamic_t dyn_view_menu = {
     {.item_type = ITEM_TYPE_DYNAMIC},
@@ -31,16 +21,10 @@ view_screen_t scr_menu = {
     .focus_item = 0,
 };
 
-enum MenuItem : uint8_t
-{
-    MENU_PLAY = 0,
-    MENU_ABOUT,
-    MENU_COUNT // tổng số menu
-};
-
 static const char *menu_text[MENU_COUNT] = {
     "Play",
     "Config"};
+
 void drawFrameBlock(int x, int y)
 {
     for (int j = 0; j < 2; j++)
@@ -79,7 +63,7 @@ void renderArrow()
 {
     int arrowX = 10;
     int arrowY = 30;
-    if (isBlink)
+    if (gameMenu.isBlink)
         view_render.fillTriangle(arrowX, arrowY - 5, arrowX, arrowY + 5, arrowX + 6, arrowY, WHITE);
     else
         view_render.fillTriangle(arrowX, arrowY - 5, arrowX, arrowY + 5, arrowX + 6, arrowY, BLACK);
@@ -97,8 +81,8 @@ void renderScrollbar()
     if (thumbH < 6)
         thumbH = 6; // đảm bảo không quá nhỏ
 
-    // Vị trí cơ sở (theo menu_index)
-    float ratio = (float)menu_index + ((float)anim_offset / 32.0f); // 32 = charHeight*2
+    // Vị trí cơ sở (theo gameMenu.menu_index)
+    float ratio = (float)gameMenu.menu_index + ((float)gameMenu.anim_offset / 32.0f); // 32 = charHeight*2
     float posRatio = ratio / (MENU_COUNT - 1);
     if (posRatio < 0)
         posRatio = 0;
@@ -113,15 +97,17 @@ void renderScrollbar()
     view_render.fillRect(scrollbarX + 1, thumbY + 1, scrollbarW - 2, thumbH - 2, WHITE);
 }
 
-void renderItem(int charHeight, int centerY)
+void renderItem()
 {
+    int charHeight = 16;
+    int centerY = 24;
     for (int i = -1; i <= 1; i++)
     {
-        int item_index = (int)menu_index + i;
+        int item_index = (int)gameMenu.menu_index + i;
         if (item_index < 0 || item_index >= MENU_COUNT)
             continue;
 
-        int y = centerY + 4 + (i * charHeight * 2) - anim_offset;
+        int y = centerY + 4 + (i * charHeight * 2) - gameMenu.anim_offset;
         const char *text = menu_text[item_index];
         int x = 30;
         view_render.setCursor(x, y);
@@ -155,16 +141,18 @@ void renderItem(int charHeight, int centerY)
         }
     }
 }
-void anim(int charHeight, int centerY)
+void anim()
 {
-    if (anim_active)
+    int charHeight = 16;
+    int centerY = 24;
+    if (gameMenu.anim_active)
     {
-        anim_offset += anim_direction * anim_speed;
-        if (abs(anim_offset) >= charHeight * 2)
+        gameMenu.anim_offset += gameMenu.anim_direction * gameMenu.anim_speed;
+        if (abs(gameMenu.anim_offset) >= charHeight * 2)
         {
-            anim_offset = 0;
-            anim_active = false;
-            menu_index += anim_direction;
+            gameMenu.anim_offset = 0;
+            gameMenu.anim_active = false;
+            gameMenu.menu_index += gameMenu.anim_direction;
         }
     }
 }
@@ -178,14 +166,12 @@ void view_scr_menu()
     view_render.setTextColor(WHITE);
 
     renderArrow();
-    int charHeight = 16;
-    int centerY = 24;
 
     // Cập nhật animation
-    anim(charHeight, centerY);
+    anim();
 
     // Vẽ 3 item (trên, giữa, dưới)
-    renderItem(charHeight, centerY);
+    renderItem();
     renderScrollbar();
 }
 void scr_menu_handle(ak_msg_t *msg)
@@ -193,71 +179,64 @@ void scr_menu_handle(ak_msg_t *msg)
     switch (msg->sig)
     {
     case SCREEN_ENTRY:
-    if(!isEeproomInit)
-    {
-        game.loadConfig();
-        isEeproomInit = true;
-    }
-        menu_index = 0;
-        anim_offset = 0;
-        anim_active = false;
+        if (!gameMenu.isEeproomInit)
+        {
+            game.loadConfig();
+            gameMenu.isEeproomInit = true;
+        }
+        gameMenu.menu_index = 0;
+        gameMenu.anim_offset = 0;
+        gameMenu.anim_active = false;
         timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
         break;
 
     case AC_DISPLAY_BUTON_UP_PRESS:
-        if (!anim_active && menu_index > 0)
+        if (!gameMenu.anim_active && gameMenu.menu_index > 0)
         {
             if (game.getIsAudio())
 
                 BUZZER_PlayTones(tones_menu_click);
 
-            anim_direction = -1;
-            anim_offset = 0;
-            anim_active = true;
+            gameMenu.anim_direction = -1;
+            gameMenu.anim_offset = 0;
+            gameMenu.anim_active = true;
         }
         break;
 
     case AC_DISPLAY_BUTON_DOWN_PRESS:
-        if (!anim_active && menu_index < MENU_COUNT - 1)
+        if (!gameMenu.anim_active && gameMenu.menu_index < MENU_COUNT - 1)
         {
             if (game.getIsAudio())
 
                 BUZZER_PlayTones(tones_menu_click);
 
-            anim_direction = +1;
-            anim_offset = 0;
-            anim_active = true;
+            gameMenu.anim_direction = +1;
+            gameMenu.anim_offset = 0;
+            gameMenu.anim_active = true;
         }
         break;
 
     case AC_DISPLAY_BUTON_MODE_PRESS:
-        // APP_DBG_SIG("Chọn mục: %s\n", menu_text[menu_index]);
         if (game.getIsAudio())
 
             BUZZER_PlayTones(tones_menu_select);
 
-        if (menu_index == 0)
+        if (gameMenu.menu_index == 0)
         {
-            // timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
-            // task_post_pure_msg(AC_TASK_GAME_ID, AC_GAME_INIT);
-
             SCREEN_TRAN(scr_gamemap_handle, &scr_gamemap);
-            // SCREEN_TRAN(scr_timer_handle, &scr_timer);
         }
         else
         {
-            // timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
-
             SCREEN_TRAN(scr_config_handle, &scr_config);
         }
         break;
 
     case AC_DISPLAY_UPDATE:
-        blinkCount++;
-        if (blinkCount >= 8)
+        gameMenu.blinkCount++;
+        if (gameMenu.blinkCount >= 8)
         {
-            isBlink = !isBlink;
-            blinkCount = 0;
+            gameMenu.isBlink = !gameMenu.isBlink;
+            gameMenu.blinkCount = 0;
         }
         break;
 

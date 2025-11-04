@@ -77,7 +77,7 @@ private:
     uint16_t length=3;
     uint16_t snake_temp_len;
 
-    uint32_t speed = 120;
+    uint32_t speed = 0;
 
     snake_state_t state;
 

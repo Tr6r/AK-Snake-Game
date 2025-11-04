@@ -195,9 +195,9 @@ void initSubItems()
         break;
     case 1:
         // xprintf("speed : %d\n",game.snakeGetSpeed() );/
-        if (game.snakeGetSpeed() == 150)
+        if (game.snakeGetSpeed() == 120)
             menuConfig.currentItem = 0;
-        else if (game.snakeGetSpeed() == 120)
+        else if (game.snakeGetSpeed() == 100)
             menuConfig.currentItem = 1;
         menuConfig.currentLabels = difficulty_labels;
         menuConfig.labelCount = sizeof(difficulty_labels) / sizeof(difficulty_labels[0]);
@@ -247,13 +247,13 @@ void chooseSubItem()
     {
         if (idx == 0)
         {
-            game.snakeChangeSpeed(150);
-            game.gameCfg.difficulty = 150;
+            game.snakeChangeSpeed(120);
+            game.gameCfg.difficulty = 120;
         }
         else
         {
-            game.snakeChangeSpeed(120);
-            game.gameCfg.difficulty = 120;
+            game.snakeChangeSpeed(100);
+            game.gameCfg.difficulty = 100;
         }
 
         break;

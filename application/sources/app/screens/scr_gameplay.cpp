@@ -6,12 +6,7 @@ using namespace std;
 
 // --- Dynamic view ---
 static void view_scr_gameplay();
-
-uint8_t apple_blink_count = 0;
-uint8_t frame_count = 0;
-uint16_t fps_timer = 0;
-uint8_t fps = 0;
-bool apple_blink_state = true;
+gameplay_t gameplay;
 view_dynamic_t dyn_view_gameplay = {
     {.item_type = ITEM_TYPE_DYNAMIC},
     view_scr_gameplay};
@@ -143,7 +138,7 @@ void checkHighestScore()
 }
 void renderApple()
 {
-    if (apple_blink_state)
+    if (gameplay.apple_blink_state)
     {
         Coord &apple_c = game.appleGetSegment();
 
@@ -191,12 +186,31 @@ void renderWalls()
         wall_idx = (wall_idx + 1) % MAX_OBSTACLE_SEGMENTS;
     }
 }
-// --- Render ---
-void view_scr_gameplay()
+void renderGameOver()
 {
-    view_render.fillRect(0, 0, 128, 64, BLACK);
-    view_render.drawRect(0, 12, 128, 48, WHITE);
+
+    timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE);
+
+    checkHighestScore();
+
+    view_render.setTextSize(2);
+    view_render.setTextColor(WHITE);
+    view_render.setCursor(11, 23);
+    view_render.print("GAME OVER");
+    view_render.fillRect(11, 39, 107, 1, WHITE);
+
     view_render.setTextSize(1);
+    view_render.setCursor(70, 45);
+    char buf[16];
+
+    sprintf(buf, "SCORE:%02d", game.gameGetScore());
+    view_render.print(buf);
+    view_render.fillRect(70, 54, 47, 1, WHITE);
+
+}
+void renderGameInfo()
+
+{
     char buf[16];
 
     // len
@@ -209,30 +223,23 @@ void view_scr_gameplay()
     sprintf(buf, "score:%02d", game.gameGetScore());
     view_render.print(buf);
 
-    // fps
+    // gameplay.fps
     view_render.setCursor(90, 3);
-    sprintf(buf, "fps:%02d", fps);
+    sprintf(buf, "fps:%02d", gameplay.fps);
     view_render.print(buf);
+}
+
+// --- Render ---
+void view_scr_gameplay()
+{
+    view_render.fillRect(0, 0, 128, 64, BLACK);
+    view_render.drawRect(0, 12, 128, 48, WHITE);
+    view_render.setTextSize(1);
+    renderGameInfo();
 
     if (game.gameGetState() == GAME_STATE_GAMEOVER)
     {
-        timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE);
-
-        checkHighestScore();
-
-        view_render.setTextSize(2);
-        view_render.setTextColor(WHITE);
-        view_render.setCursor(11, 23);
-        view_render.print("GAME OVER");
-        view_render.fillRect(11, 39, 107, 1, WHITE);
-
-        view_render.setTextSize(1);
-        view_render.setCursor(70, 45);
-        sprintf(buf, "SCORE:%02d", game.gameGetScore());
-        view_render.print(buf);
-        view_render.fillRect(70, 54, 47, 1, WHITE);
-
-        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_MENU, 3000, TIMER_ONE_SHOT);
+        renderGameOver();
     }
     else
     {
@@ -252,14 +259,7 @@ void scr_gameplay_handle(ak_msg_t *msg)
     case SCREEN_ENTRY:
         APP_DBG_SIG("SCREEN_ENTRY (gamelay)\n");
         game.gameChangeState(GAME_STATE_PLAYING);
-        xprintf("snake speedddd: %d\n", game.snakeGetSpeed());
-
         timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
-        break;
-    case AC_DISPLAY_SHOW_MENU:
-
-        SCREEN_TRAN(scr_menu_handle, &scr_menu);
-        game.gameChangeState(GAME_STATE_MENU);
         break;
 
     case AC_DISPLAY_BUTON_MODE_PRESS:
@@ -268,11 +268,14 @@ void scr_gameplay_handle(ak_msg_t *msg)
             game.gameChangeState(GAME_STATE_PAUSE);
             timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE);
         }
-        else
+        else if(game.gameGetState() == GAME_STATE_GAMEOVER)
+        {
+                    game.gameChangeState(GAME_STATE_MENU);
+        SCREEN_TRAN(scr_menu_handle, &scr_menu);
+        }
+        else 
         {
             game.gameChangeState(GAME_STATE_PLAYING);
-            xprintf("snake speedddd: %d\n", game.snakeGetSpeed());
-
             timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SNAKE_UPDATE, game.snakeGetSpeed(), TIMER_PERIODIC);
         }
 
@@ -280,19 +283,19 @@ void scr_gameplay_handle(ak_msg_t *msg)
 
     case AC_DISPLAY_SNAKE_UPDATE:
 
-        apple_blink_count++;
-        frame_count++;
-        fps_timer += 250;
-        if (apple_blink_count >= 3)
+        gameplay.apple_blink_count++;
+        gameplay.frame_count++;
+        gameplay.fps_timer += 250;
+        if (gameplay.apple_blink_count >= 3)
         {
-            apple_blink_state = !apple_blink_state;
-            apple_blink_count = 0;
+            gameplay.apple_blink_state = !gameplay.apple_blink_state;
+            gameplay.apple_blink_count = 0;
         }
-        if (fps_timer >= 1000)
+        if (gameplay.fps_timer >= 1000)
         {
-            fps = frame_count;
-            frame_count = 0;
-            fps_timer = 0;
+            gameplay.fps = gameplay.frame_count;
+            gameplay.frame_count = 0;
+            gameplay.fps_timer = 0;
         }
         game.snakeUpdate();
 
