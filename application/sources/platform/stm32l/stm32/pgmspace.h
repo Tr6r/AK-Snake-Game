@@ -24,7 +24,6 @@
 #define __PGMSPACE_H_ 1
 
 #include <inttypes.h>
-#include "Arduino.h"
 
 #define PROGMEM
 #define PGM_P  const char *

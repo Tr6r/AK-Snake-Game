@@ -16,6 +16,7 @@
 #include "task_display.h"
 #include "view_render.h"
 #include <string>
+#include "stm32/pgmspace.h"
 
 #include "buzzer.h"
 const uint8_t frame_block[2] = {

@@ -47,8 +47,6 @@
 
 /* arduino include */
 #include "SPI.h"
-#include "WString.h"
-#include "HardwareSerial.h"
 
 /* common include */
 #include "screen_manager.h"
