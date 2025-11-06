@@ -1,6 +1,6 @@
 ## Snake Gam built on AK-base-kit
 
-![alt text](assets/game.jpg)
+![alt text](assets/game.jpg){ width=300px }
 
 <div align="center">
   <img src="assets/gamedemo.mp4" alt="Snake Game Demo" />
