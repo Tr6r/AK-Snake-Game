@@ -55,7 +55,7 @@ public:
     bool hitsEdge(Coord *p);
     Coord moveSnake(Coord *delta);
     Coord moveSnakeWrapAround(Coord *delta);
-void changeuint8Len(uint8_t l);
+    void changeuint8Len(uint8_t l);
 
     // Getter
     bool isAlive();
@@ -74,7 +74,7 @@ private:
     Coord body[MAX_SNAKE_LEN];
     uint16_t head_index;
     uint16_t tail_index;
-    uint16_t length=3;
+    uint16_t length;
     uint16_t snake_temp_len;
 
     uint32_t speed = 0;
