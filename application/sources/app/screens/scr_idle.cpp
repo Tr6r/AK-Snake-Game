@@ -11,6 +11,7 @@ static void view_scr_idle();
 view_dynamic_t dyn_view_idle = {
     {.item_type = ITEM_TYPE_DYNAMIC},
     view_scr_idle};
+
 view_screen_t scr_idle = {
     &dyn_view_idle,
     ITEM_NULL,
@@ -19,22 +20,31 @@ view_screen_t scr_idle = {
 };
 
 std::vector<GoldenSpiral> spirals;
+
+bool isIdleInit = false;
+
 void initSpiral()
 {
+
     float x = 15 + ((float)rand() / RAND_MAX) * (110 - 15);
     float y = 15 + ((float)rand() / RAND_MAX) * (50 - 15);
     spirals.push_back(GoldenSpiral(x, y));
     timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
-
 }
 void enterIdleScreen()
 {
+    if (isIdleInit)
+        return;
+    xprintf("hhaa");
+    isIdleInit = true;
     spirals.clear();
     initSpiral();
 }
 void backToMainScreen()
 {
     task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
+    isIdleInit = false;
+
     switch (game.gameGetState())
     {
     case GAME_STATE_MENU:
@@ -73,9 +83,8 @@ bool canSpawnAt(float nx, float ny)
     }
     return true;
 }
-void render(const GoldenSpiral &s)
+void renderGoldenSpirals(const GoldenSpiral &s)
 {
-
     float a = 0;
     while (a < s.angle)
     {
@@ -89,9 +98,9 @@ void render(const GoldenSpiral &s)
 // --- Render ---
 void view_scr_idle()
 {
-    if (spirals.size() < 6)
+    if (spirals.size() < 4)
     {
-        if (rand() % 10 == 0)
+        if (rand() % 30 == 0)
         {
             for (int tries = 0; tries < 10; tries++)
             {
@@ -107,16 +116,15 @@ void view_scr_idle()
         }
     }
 
-    // update + render
+    // // update + render
     for (int i = spirals.size() - 1; i >= 0; i--)
     {
         if (!spirals[i].update())
             spirals.erase(spirals.begin() + i);
         else
-            render(spirals[i]);
+            renderGoldenSpirals(spirals[i]);
     }
 }
-
 // --- Handle ---
 void scr_idle_handle(ak_msg_t *msg)
 {
@@ -125,7 +133,6 @@ void scr_idle_handle(ak_msg_t *msg)
     case SCREEN_ENTRY:
 
         enterIdleScreen();
-
         break;
     case AC_DISPLAY_BUTON_MODE_PRESS:
         backToMainScreen();

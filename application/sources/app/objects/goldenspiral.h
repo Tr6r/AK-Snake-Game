@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <vector>
 
-const uint8_t fib[] = {1, 1, 2, 3, 5, 8, 13, 21, 34};
-#define FIB_COUNT (sizeof(fib) / sizeof(fib[0]))
+
 #define TWO_PI (6.283185307f)
 
 class GoldenSpiral
