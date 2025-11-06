@@ -3,7 +3,7 @@
 ![alt text](assets/game.jpg)
 
 <div align="center">
-  <img src="assets/demo.gif" alt="Snake Game Demo" />
+  <img src="assets/gamedemo.mp4" alt="Snake Game Demo" />
 </div>
 
 This game was built on top of AK-mOS (a lightweight RTOS) together with a small OLED GUI system. The main purpose was to experiment with an event-driven task model — using tasks, message/events, and non-blocking flows — while still keeping the whole project simple and small enough to run on a low-power MCU.
@@ -31,11 +31,5 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 - Data integrity guaranteed with uint16 checksum
 - Smooth animations for all movements
 - Snake, food and walls are drawn with bitmap icons (more lively than plain pixels)
-
-
-
-
-
-
 - User-adjustable mode, difficulty and buzzer on/off
 - Built-in screen saver: if no user action for 5 seconds, system switches into idle screen
