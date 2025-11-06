@@ -10,7 +10,7 @@
 
 This game was built on top of AK-OS (a lightweight RTOS) together with a small OLED system. The main purpose was to experiment with an event-driven task model — using tasks, message/events, and non-blocking flows — while still keeping the whole project simple and small enough to run on a low-power MCU.
 
-## Introduction
+## I.Introduction
 This is a minimalist Snake Game project running on STM32L151 with a 128×64 OLED display, 1 piezo buzzer and 3 physical push buttons for input control.
 <div align="center">
 <img src="assets/image.png" width="400" />
@@ -24,7 +24,7 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 - hardware UI feedback via buzzer events
 - auto screen saver: enters idle animation after 5 seconds of no input (prevents OLED burn-in and looks cool)
 
-## Features
+## II.Features
 
 - Game rendered on LCD Oled 1.3"(128x64)
 - Controlled by 3 physical buttons (Left, Right, Mode)
@@ -36,7 +36,7 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 - User-adjustable mode, difficulty and buzzer on/off
 - Built-in screen saver: if no user action for 5 seconds, system switches into idle screen
 
-## Flow Charts
+## III.Flow Charts
 The project logic is organized into two main flows: **Settings** and **Gameplay**.  
 Below diagrams illustrate the transitions between screens, tasks, and user interactions:
 
@@ -45,10 +45,10 @@ Below diagrams illustrate the transitions between screens, tasks, and user inter
   <img src="assets/gameplay_flowchart.png" alt="Gameplay Flowchart" width="400"/>
 </div>
 
-## Class
+## IVIV.Class
 ![alt text](assets/class_diagram.png)
 
-## Task
+## V.Task
 Each task runs independently and has its own private stack. Tasks that handle messages require a message queue
 - Event Handling: Tasks respond to events by executing actions in response to messages.
 - Synchronization: Tasks ensure events are processed in order, avoiding conflicts between concurrent actions.
@@ -79,11 +79,11 @@ Task screen manage all screens in this application including:
 - Setting screen
 - Idle screen
 
-## EEPROM Storage
+## VI.EEPROM Storage
 Game settings and high scores are persistently stored in the STM32L151 flash(0X0800 0000)
 ## Stored data:
-<img width="600" alt="gameconfig" src="https://github.com/user-attachments/assets/2b198618-d949-4e06-827d-f2671cc8fe7b" />
+<img width="300" alt="gameconfig" src="https://github.com/user-attachments/assets/2b198618-d949-4e06-827d-f2671cc8fe7b" />
 
-##Data integrity:
+## Data integrity:
 <img width="600"  alt="checksumfunction" src="https://github.com/user-attachments/assets/ea58b171-bb81-487b-8677-0b03721d0988" />
 
