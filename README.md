@@ -1,30 +1,41 @@
-## AK Embedded Base Kit - STM32L151 - Lập trình nhúng vi điều khiển
+## Snake Gam built on AK-base-kit
 
-[<img src="hardware/images/ak-embedded-software-logo.jpg" width="240"/>](https://github.com/epcbtech)
+![alt text](assets/game.jpg)
 
-AK Embedded Base Kit is an evaluation kit for advanced embedded software learners.
-- The KIT integrates 1.3" Oled LCD, 3 push buttons, and 1 Buzzers that play music, to learn the event-driven system through hands-on game machine design.
-- The KIT also integrates RS485, NRF24L01+, and Flash up to 32MB, suitable for prototyping practical applications in embedded systems such as: wired communication, wireless wireless, data logger storage applications,...
+<div align="center">
+  <img src="assets/demo.gif" alt="Snake Game Demo" />
+</div>
 
-[<img src="hardware/images/ak-embedded-base-kit-stm32l151-lap-trinh-nhung-vi-dieu-khien.jpg" width="480"/>](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu)
+This game was built on top of AK-mOS (a lightweight RTOS) together with a small OLED GUI system. The main purpose was to experiment with an event-driven task model — using tasks, message/events, and non-blocking flows — while still keeping the whole project simple and small enough to run on a low-power MCU.
 
-### Memory map
-- [ 0x08000000 ] : **Boot** [[ak-base-kit-stm32l151-boot.bin]](https://github.com/epcbtech/ak-base-kit-stm32l151/blob/main/hardware/bin/ak-base-kit-stm32l151-boot.bin)
-- [ 0x08002000 ] : **BSF** [ Memory for data sharing between Boot and Application ]
-- [ 0x08003000 ] : **Application** [[ak-base-kit-stm32l151-application.bin]](https://github.com/epcbtech/ak-base-kit-stm32l151/blob/main/hardware/bin/ak-base-kit-stm32l151-application.bin)
+## Introduction
+This is a minimalist Snake Game project running on STM32L151 with a 128×64 OLED display, 1 piezo buzzer and 3 physical push buttons for input control.
+<div align="center">
+  <img src="assets/image.png" alt="Ak base kit" />
+</div>
+The game is designed to be fully standalone on the MCU (no PC connection needed). It supports multiple maps, multiple difficulty levels, persistent user config, stored highscores and in-game animations.
 
-**Note:** After loading boot & application firmware, you can use [AK - Flash](https://github.com/epcbtech/ak-flash) to load the application directly through the **USB** port on the KIT
-```sh
-ak_flash /dev/ttyUSB0 ak-base-kit-stm32l151-application.bin 0x08003000
-```
+- This repository demonstrates:
+- low-cost embedded game logic on an ultra-low-power MCU
+- simple scene/state management (Menu → Map Select → Gameplay → Game Over)
+- saving persistent user configuration + highscores via internal Flash
+- hardware UI feedback via buzzer events
+- auto screen saver: enters idle animation after 5 seconds of no input (prevents OLED burn-in and looks cool)
 
-### Hardware
-[<img src="hardware/images/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-stm32l151-non-lcd.jpg" width="480"/>](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu)
+## Features
 
-[<img src="hardware/images/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-stm32l151-non-lcd-bottom.jpg" width="480"/>](https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu)
+- Game rendered on LCD Oled 1.3"(128x64)
+- Controlled by 3 physical buttons (Left, Right, Mode)
+- Simple sound effects using a passive buzzer (click, score, game over, ...)
+- Game config + high score are stored in STM32L15 EEPROOM
+- Data integrity guaranteed with uint16 checksum
+- Smooth animations for all movements
+- Snake, food and walls are drawn with bitmap icons (more lively than plain pixels)
 
-### Reference
-| Topic | Link |
-| ------ | ------ |
-| Blog & Tutorial | https://epcb.vn/blogs/ak-embedded-software |
-| Where to buy KIT? | https://epcb.vn/products/ak-embedded-base-kit-lap-trinh-nhung-vi-dieu-khien-mcu |
+
+
+
+
+
+- User-adjustable mode, difficulty and buzzer on/off
+- Built-in screen saver: if no user action for 5 seconds, system switches into idle screen

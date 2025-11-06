@@ -183,6 +183,7 @@ $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(L
 	@$(OBJCOPY) -O binary $(@) $(@:.axf=.bin)
 	@$(OBJCOPY) -O binary $(@) $(@:.axf=.out)
 	@$(OBJCOPY) -O binary $(@) $(@:.axf=.elf)
+# 	@strip 
 	@$(ARM_SIZE) $(TARGET)
 
 $(OBJECTS_DIR)/%.o: %.c

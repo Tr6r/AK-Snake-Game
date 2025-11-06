@@ -269,7 +269,10 @@ void scr_gameplay_handle(ak_msg_t *msg)
         }
         else if (game.gameGetState() == GAME_STATE_GAMEOVER)
         {
+
             game.gameChangeState(GAME_STATE_MENU);
+            timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
+
             SCREEN_TRAN(scr_menu_handle, &scr_menu);
         }
         else
