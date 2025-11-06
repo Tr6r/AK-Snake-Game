@@ -3,7 +3,9 @@
 
 <div align="center">
   <img src="assets/game.jpg" width="400" />
-
+  <div>
+    https://github.com/user-attachments/assets/1fa299ac-dec4-4440-a680-629d9f9415f1
+  </div>
 </div>
 
 This game was built on top of AK-mOS (a lightweight RTOS) together with a small OLED GUI system. The main purpose was to experiment with an event-driven task model — using tasks, message/events, and non-blocking flows — while still keeping the whole project simple and small enough to run on a low-power MCU.
