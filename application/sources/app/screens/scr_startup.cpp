@@ -56,7 +56,8 @@ void scr_startup_handle(ak_msg_t *msg)
 	break;
 	case AC_DISPLAY_SHOW_MENU:
 	{
-		SCREEN_TRAN(scr_menu_handle, &scr_menu);
+		SCREEN_TRAN(scr_idle_handle, &scr_idle);
+		// SCREEN_TRAN(scr_menu_handle, &scr_menu);
 
 	}
 	break;

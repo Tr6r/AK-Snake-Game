@@ -23,6 +23,8 @@
 #include <stdbool.h>
 #include <functional>
 
+
+
 extern view_dynamic_t dyn_view_idle;
 
 extern view_screen_t scr_idle;

@@ -1,7 +1,7 @@
 
 #include "scr_gameplay.h"
 #include "game.h"
-
+#include "goldenspiral.h"
 #include <functional>
 using namespace std;
 
@@ -17,6 +17,21 @@ view_screen_t scr_idle = {
     ITEM_NULL,
     .focus_item = 0,
 };
+GoldenSpiral sp(30.0, 30.0);
+
+void render(float x,float y)
+{
+    // từ 0 → angle hiện tại
+    float a = 0;
+    while (a < sp.angle)
+    {
+        float r = sp.k * a;
+        int px = x + cos(a) * r;
+        int py = y + sin(a) * r;
+        view_render.drawPixel(px, py, WHITE);
+        a += 0.05;
+    }
+}
 void backToMainScreen()
 {
     task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
@@ -49,8 +64,11 @@ void backToMainScreen()
 void view_scr_idle()
 {
 
-    view_render.setCursor(10, 10);
-    view_render.print("IDLE");
+    if (!sp.update()) {
+        sp.reset(); // loop again
+xprintf("ssaaa");
+    }
+    render(sp.x,sp.y);
 }
 
 // --- Handle ---
@@ -59,7 +77,7 @@ void scr_idle_handle(ak_msg_t *msg)
     switch (msg->sig)
     {
     case SCREEN_ENTRY:
-
+        timer_set(AC_TASK_DISPLAY_ID,AC_DISPLAY_IDLE_UPDATE,150,TIMER_PERIODIC);
         break;
     case AC_DISPLAY_BUTON_MODE_PRESS:
         backToMainScreen();
@@ -69,6 +87,8 @@ void scr_idle_handle(ak_msg_t *msg)
         break;
     case AC_DISPLAY_BUTON_DOWN_PRESS:
         backToMainScreen();
+        break;
+    case AC_DISPLAY_IDLE_UPDATE:
         break;
     default:
         break;
