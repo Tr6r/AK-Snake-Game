@@ -1,4 +1,3 @@
-
 #include "scr_gameplay.h"
 #include "game.h"
 #include "goldenspiral.h"
@@ -25,7 +24,6 @@ bool isIdleInit = false;
 
 void initSpiral()
 {
-
     float x = 15 + ((float)rand() / RAND_MAX) * (110 - 15);
     float y = 15 + ((float)rand() / RAND_MAX) * (50 - 15);
     spirals.push_back(GoldenSpiral(x, y));
@@ -35,7 +33,6 @@ void enterIdleScreen()
 {
     if (isIdleInit)
         return;
-    xprintf("hhaa");
     isIdleInit = true;
     spirals.clear();
     initSpiral();
@@ -48,23 +45,17 @@ void backToMainScreen()
     switch (game.gameGetState())
     {
     case GAME_STATE_MENU:
-
         SCREEN_TRAN(scr_menu_handle, &scr_menu);
-
         break;
     case GAME_STATE_SETTING:
         SCREEN_TRAN(scr_config_handle, &scr_config);
-
         break;
     case GAME_STATE_CHOOSE_MAP:
         SCREEN_TRAN(scr_gamemap_handle, &scr_gamemap);
-
         break;
-
     case GAME_STATE_GAMEOVER:
         SCREEN_TRAN(scr_gameplay_handle, &scr_gameplay);
         break;
-
     default:
         break;
     }
@@ -76,7 +67,6 @@ bool canSpawnAt(float nx, float ny)
         float dx = nx - s.x;
         float dy = ny - s.y;
         float d2 = dx * dx + dy * dy;
-
         // safe zone radius
         if (d2 < (20 * 20))
             return false; // 20 pixel
@@ -115,7 +105,6 @@ void view_scr_idle()
             }
         }
     }
-
     // // update + render
     for (int i = spirals.size() - 1; i >= 0; i--)
     {
