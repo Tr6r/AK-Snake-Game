@@ -45,7 +45,7 @@ Below diagrams illustrate the transitions between screens, tasks, and user inter
   <img src="assets/gameplay_flowchart.png" alt="Gameplay Flowchart" width="400"/>
 </div>
 
-## IVIV.Class
+## IV.Class
 ![alt text](assets/class_diagram.png)
 
 ## V.Task
