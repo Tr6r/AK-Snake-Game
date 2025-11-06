@@ -238,7 +238,6 @@ void view_scr_gameplay()
 
     if (game.gameGetState() == GAME_STATE_GAMEOVER)
     {
-        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
         task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_INIT);
         renderGameOver();
     }

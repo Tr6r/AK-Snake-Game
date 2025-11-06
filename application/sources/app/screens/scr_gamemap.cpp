@@ -171,7 +171,7 @@ void scr_gamemap_handle(ak_msg_t *msg)
         gameMap.animating = false;
         gameMap.ignoreNav = true;
 
-        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
+        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
     }
     break;
 

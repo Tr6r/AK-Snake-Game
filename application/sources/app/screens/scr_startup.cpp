@@ -51,13 +51,13 @@ void scr_startup_handle(ak_msg_t *msg)
 		view_render.initialize();
 		view_render_display_on();
 		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_MENU, AC_DISPLAY_STARTUP_INTERVAL, TIMER_ONE_SHOT);
+		// SCREEN_TRAN(scr_idle_handle, &scr_idle);
 
 	}
 	break;
 	case AC_DISPLAY_SHOW_MENU:
 	{
-		SCREEN_TRAN(scr_idle_handle, &scr_idle);
-		// SCREEN_TRAN(scr_menu_handle, &scr_menu);
+		SCREEN_TRAN(scr_menu_handle, &scr_menu);
 
 	}
 	break;

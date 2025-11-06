@@ -181,13 +181,12 @@ void initMenu()
         game.loadConfig();
         gameMenu.isEeproomInit = true;
         task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_INIT);
-        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
     }
     gameMenu.anim_active = false;
 
     game.gameChangeState(GAME_STATE_MENU);
 
-    timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
 }
 void scr_menu_handle(ak_msg_t *msg)
 {
@@ -200,7 +199,6 @@ void scr_menu_handle(ak_msg_t *msg)
     case AC_DISPLAY_BUTON_UP_PRESS:
         if (!gameMenu.anim_active && gameMenu.menu_index > 0)
         {
-            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
             task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
             if (game.getIsAudio())
@@ -216,7 +214,6 @@ void scr_menu_handle(ak_msg_t *msg)
     case AC_DISPLAY_BUTON_DOWN_PRESS:
         if (!gameMenu.anim_active && gameMenu.menu_index < MENU_COUNT - 1)
         {
-            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
             task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
             if (game.getIsAudio())
@@ -234,14 +231,11 @@ void scr_menu_handle(ak_msg_t *msg)
         if (game.getIsAudio())
 
             BUZZER_PlayTones(tones_menu_select);
-        timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
-        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
         task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
         if (gameMenu.menu_index == 0)
         {
             game.gameChangeState(GAME_STATE_CHOOSE_MAP);
-
             SCREEN_TRAN(scr_gamemap_handle, &scr_gamemap);
         }
         else

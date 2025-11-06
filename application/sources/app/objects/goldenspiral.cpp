@@ -1,31 +1,22 @@
 #include "goldenspiral.h"
-#include "xprintf.h"
-GoldenSpiral::GoldenSpiral(float cx, float cy)
-{
-    x = cx;
-    y = cy;
-    angle = 0; // radian
-    radius = 0;
-    k = 0.45; // tweak
-    maxLoop = 3;
-}
 
-void GoldenSpiral::reset()
+GoldenSpiral::GoldenSpiral(float px, float py)
 {
+    x = px;
+    y = py;
     angle = 0;
     radius = 0;
+    k = 0.45;
+    speedAngle = 0.3;
+    maxLoop = 3;
 }
 
 bool GoldenSpiral::update()
 {
-    angle += 0.4; // speed spin
+    angle += speedAngle;
     radius = k * angle;
 
-    // check xong 3 vòng
     if (angle >= (TWO_PI * maxLoop))
-    {
-        xprintf("ss");
-        return false; // end
-    }
+        return false;
     return true;
 }

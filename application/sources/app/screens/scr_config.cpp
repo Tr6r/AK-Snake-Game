@@ -344,7 +344,6 @@ void scr_config_handle(ak_msg_t *msg)
         APP_DBG_SIG("SCREEN_ENTRY\n");
         menuConfig.animating = false;
         menuConfig.ignoreNav = true;
-        timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE, 100, TIMER_PERIODIC);
     }
     break;
 
@@ -352,7 +351,6 @@ void scr_config_handle(ak_msg_t *msg)
     {
         if (checkNav())
             return;
-        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
         task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
         if (game.getIsAudio())
@@ -374,7 +372,6 @@ void scr_config_handle(ak_msg_t *msg)
 
         if (!menuConfig.animating && !menuConfig.isPopup)
         {
-            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
             task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
             if (game.getIsAudio())
@@ -397,7 +394,6 @@ void scr_config_handle(ak_msg_t *msg)
     {
         if (!menuConfig.animating && !menuConfig.isPopup)
         {
-            // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
             task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
             if (game.getIsAudio())
@@ -417,7 +413,6 @@ void scr_config_handle(ak_msg_t *msg)
     case AC_DISPLAY_BUTON_MODE_LONG_RELEASED:
     {
 
-        // timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
         task_post_pure_msg(AC_TASK_IDLE_ID, AC_IDLE_RESET);
 
         if (!menuConfig.isPopup)
@@ -425,7 +420,6 @@ void scr_config_handle(ak_msg_t *msg)
             if (game.getIsAudio())
                 BUZZER_PlayTones(tones_menu_select);
 
-            timer_remove_attr(AC_TASK_DISPLAY_ID, AC_DISPLAY_UPDATE);
 
             SCREEN_TRAN(scr_menu_handle, &scr_menu);
             return;

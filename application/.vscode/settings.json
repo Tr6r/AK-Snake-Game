@@ -69,7 +69,16 @@
         "valarray": "cpp",
         "stm32l1xx.h": "c",
         "executor": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "list": "cpp",
+        "io_context": "cpp",
+        "netfwd": "cpp",
+        "ratio": "cpp",
+        "timer": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp"
     },
     "cmake.sourceDirectory": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application/sources/libraries/ArduinoJson/extras/tests/JsonVariant",
 
