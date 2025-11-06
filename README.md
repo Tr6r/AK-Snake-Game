@@ -1,9 +1,9 @@
 ## Snake Gam built on AK-base-kit
 
-![alt text](assets/game.jpg){ width=300px }
 
 <div align="center">
-  <img src="assets/gamedemo.mp4" alt="Snake Game Demo" />
+  <img src="assets/game.jpg" width="400" />
+
 </div>
 
 This game was built on top of AK-mOS (a lightweight RTOS) together with a small OLED GUI system. The main purpose was to experiment with an event-driven task model — using tasks, message/events, and non-blocking flows — while still keeping the whole project simple and small enough to run on a low-power MCU.
@@ -11,7 +11,7 @@ This game was built on top of AK-mOS (a lightweight RTOS) together with a small 
 ## Introduction
 This is a minimalist Snake Game project running on STM32L151 with a 128×64 OLED display, 1 piezo buzzer and 3 physical push buttons for input control.
 <div align="center">
-  <img src="assets/image.png" alt="Ak base kit" />
+<img src="assets/image.png" width="400" />
 </div>
 The game is designed to be fully standalone on the MCU (no PC connection needed). It supports multiple maps, multiple difficulty levels, persistent user config, stored highscores and in-game animations.
 
@@ -33,3 +33,8 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 - Snake, food and walls are drawn with bitmap icons (more lively than plain pixels)
 - User-adjustable mode, difficulty and buzzer on/off
 - Built-in screen saver: if no user action for 5 seconds, system switches into idle screen
+
+## Class
+![alt text](assets/class_diagram.png)
+
+
