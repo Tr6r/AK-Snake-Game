@@ -85,6 +85,7 @@ Game settings and high scores are persistently stored in the STM32L151 flash(0X0
 ## Stored data:
 <img width="300" alt="gameconfig" src="https://github.com/user-attachments/assets/2b198618-d949-4e06-827d-f2671cc8fe7b" />
 
-## Data integrity:
-<img width="600"  alt="checksumfunction" src="https://github.com/user-attachments/assets/ea58b171-bb81-487b-8677-0b03721d0988" />
+## VII. OTA Firmware Update using UART Shell + External Flash
+This document describes the updated STM32 firmware update (FWU) architecture, where the update is now performed in the Application layer. Using the sys_irq_shell interface to receive data, the task_fw module to write firmware chunks into external flash.
+
 
