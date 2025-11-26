@@ -88,4 +88,53 @@ Game settings and high scores are persistently stored in the STM32L151 flash(0X0
 ## VII. OTA Firmware Update using UART Shell + External Flash
 This document describes the updated STM32 firmware update (FWU) architecture, where the update is now performed in the Application layer. Using the sys_irq_shell interface to receive data, the task_fw module to write firmware chunks into external flash.
 
+# 1. Architecture
+| Region             | Address Range              | Description                          |
+|--------------------|----------------------------|--------------------------------------|
+| Bootloader         | 0x08000000 – 0x08001FFF    | 8 KB region, protected, runs on boot |
+| BSF                | 0x08002000 – 0x08002FFF    | 4 KB, stores boot flags & headers    |
+| Application start  | 0x08003000                 | Main firmware                        |
+| Ext_Flash start    | 0x80000                    | Storage new firmware                 |
 
+# 2. Firmware Update Flow (MCU)
+### 2.1. Receive CMD and Diasble Shell Stage
+![transfer-firmware](assets/images/mcu_fwu_1.png)
+
+### 2.2. Meta Stage
+![transfer-firmware](assets/images/mcu_fwu_2.png)
+
+### 2.3. Transfer Firmware Stage
+![transfer-firmware](assets/images/mcu_fwu_3.png)
+
+### 2.4. Final Checksum Stage
+![transfer-firmware](assets/images/mcu_fwu_4.png)
+
+# 3. Bootloader Flow (MCU)
+
+### 3.1. Boot Entry & Boot Flag Check
+![boot-entry](assets/images/boot_mcu_1.png)
+
+### 3.2. External → Internal Flash Update Flow
+![boot-entry](assets/images/boot_mcu_2.png)
+![boot-entry](assets/images/boot_mcu_3.png)
+
+### 3.3. After Flashing (Checksum & Reset)
+![boot-entry](assets/images/boot_mcu_4.png)
+
+# 4. Host-side Flow (PC)
+### 4.1. Initialization (UART Open) and Send FWSET Command
+![boot-entry](assets/images/host_fwu_1.png)
+
+### 4.2. Send Metadata (Header)
+![boot-entry](assets/images/host_fwu_2.png)
+
+### 4.3. Transfer Firmware (Chunk Loop)
+![boot-entry](assets/images/host_fwu_3.png)
+
+# V. Protocol Specification
+| Field | Size (bytes) | Value / Range | Description |
+|-------|--------------:|---------------|-------------|
+| SOP   | 1             | 0xEF          | Start of packet |
+| LEN   | 1             | 0..254        | Number of DATA bytes |
+| DATA  | LEN           | —             | Payload (CMD + payload) |
+| FCS   | 1             | XOR           | LEN ^ data[0] ^ data[1] ... (simple XOR) |
