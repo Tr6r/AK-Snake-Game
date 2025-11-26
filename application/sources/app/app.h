@@ -23,12 +23,50 @@ extern "C"
 /*****************************************************************************/
 
 /* define timer */
-#define MAGIC_NUMBER_TIMER 0x55AA
+	#define MAGIC_NUMBER_TIMER 0x55AA
 
 	/* define signal */
 	enum
 	{
 		SYSTEM_AK_FLASH_UPDATE_REQ = AK_USER_DEFINE_SIG,
+	};
+
+
+	/*****************************************************************************/
+	/* FIRMWARE task define
+	*/
+	/*****************************************************************************/
+	/* define timer */
+	#define FW_PACKED_TIMEOUT_INTERVAL			(5000)
+	#define FW_UPDATE_REQ_INTERVAL				(5000)
+
+	/* define signal */
+	enum {
+		FW_CRENT_APP_FW_INFO_REQ = AK_USER_DEFINE_SIG,
+		FW_CRENT_BOOT_FW_INFO_REQ,
+		FW_UPDATE_REQ,
+		FW_UPDATE_SM_OK,
+		FW_TRANSFER_REQ,
+		FW_INTERNAL_UPDATE_APP_RES_OK,
+		FW_INTERNAL_UPDATE_BOOT_RES_OK,
+		FW_SAFE_MODE_RES_OK,
+		FW_UPDATE_SM_BUSY,
+		FW_CHECK_FCS,
+		FW_PACKED_TIMEOUT,
+		FW_CHECKING_REQ
+	};
+
+	/*****************************************************************************/
+	/*  SHELL task define
+	*/
+	/*****************************************************************************/
+	/* define timer */
+
+	/* define signal */
+	enum {
+		AC_SHELL_LOGIN_CMD = AK_USER_DEFINE_SIG,
+		AC_SHELL_REMOTE_CMD,
+		AC_SHELL_RESET_CMD,
 	};
 
 /*****************************************************************************/

@@ -19,6 +19,8 @@ enum {
 	/* APP TASKS */
 	AC_TASK_SYSTEM_ID,
 	AC_TASK_LIFE_ID,
+	AC_TASK_SHELL_ID,
+	AC_TASK_FW_ID,
 	AC_TASK_IDLE_ID,
 	AC_TASK_DBG_ID,
 	AC_TASK_DISPLAY_ID,
@@ -52,12 +54,13 @@ extern void task_life(ak_msg_t*);
 extern void task_dbg(ak_msg_t*);
 extern void task_display(ak_msg_t*);
 extern void task_idle(ak_msg_t*);
+extern void task_shell(ak_msg_t*);
+extern void task_fw(ak_msg_t*);
 
 /*****************************************************************************/
 /*  DECLARE: Task polling
  */
 /*****************************************************************************/
-extern void task_polling_zigbee();
 extern void task_polling_console();
 
 #endif //__TASK_LIST_H__

@@ -35,6 +35,7 @@ sys_boot_t app_sys_boot;
 
 static void update_boot_fw_info_to_share_boot();
 static void jump_to_application_before_reset_peripheral();
+uint16_t calc_checksum_ext_flash(uint32_t ext_addr, uint32_t size);
 
 /**************************************************************************
 * uart boot handler function declare
@@ -156,6 +157,7 @@ int boot_main() {
 		uint32_t external_fw_read_buf_len; /* actual data is read from external flash */
 		while (external_fw_index <  app_sys_boot.update_fw_app_header.bin_len) {
 			sys_ctrl_independent_watchdog_reset();
+			// APP_PRINT("[BOOT] ok\n");
 
 			external_fw_reamain = app_sys_boot.update_fw_app_header.bin_len - external_fw_index;
 
@@ -187,12 +189,15 @@ int boot_main() {
 		/**
 		 * calculate checksum, if its incorrectly, restart system and update again
 		 */
-		uint32_t internal_flash_checksum_cal = 0;
-		for (uint32_t index = 0; index < app_sys_boot.update_fw_app_header.bin_len; index += sizeof(uint32_t)) {
-			internal_flash_checksum_cal += *((uint32_t*)(app_sys_boot.fw_app_cmd.des_addr + index));
-		}
+		// uint32_t internal_flash_checksum_cal = 0;
+		// for (uint32_t index = 0; index < app_sys_boot.update_fw_app_header.bin_len; index += sizeof(uint32_t)) {
+		// 	internal_flash_checksum_cal += *((uint32_t*)(app_sys_boot.fw_app_cmd.des_addr + index));
+		// }
+			APP_PRINT("[BOOT] Final OK\n");
 
-		uint16_t internal_flash_checksum = (uint16_t)(internal_flash_checksum_cal & 0xFFFF);
+		uint16_t internal_flash_checksum = calc_checksum_ext_flash(app_sys_boot.fw_app_cmd.src_addr, app_sys_boot.update_fw_app_header.bin_len);
+		APP_PRINT("checksum_calculated:%04X\n", internal_flash_checksum);
+		APP_PRINT("checksum_transfer:%04X\n", app_sys_boot.update_fw_app_header.checksum);
 
 		if (internal_flash_checksum != app_sys_boot.update_fw_app_header.checksum) {
 			APP_PRINT("[BOOT] internal checksum incorrect\n");
@@ -224,6 +229,27 @@ int boot_main() {
 	}
 
 	return 0;
+}
+uint16_t calc_checksum_ext_flash(uint32_t ext_addr, uint32_t size)
+{
+	uint32_t sum = 0;
+	uint8_t buf[256];
+	uint32_t pos = 0;
+
+	while (pos < size)
+	{
+		sys_ctrl_independent_watchdog_reset();
+		sys_ctrl_soft_watchdog_reset();
+
+		uint32_t chunk = (size - pos > sizeof(buf)) ? sizeof(buf) : (size - pos);
+		flash_read(ext_addr + pos, buf, chunk);
+		for (uint32_t i = 0; i < chunk; ++i)
+			sum += buf[i];
+		pos += chunk;
+
+	}
+
+	return (uint16_t)(sum & 0xFFFF);
 }
 
 /**

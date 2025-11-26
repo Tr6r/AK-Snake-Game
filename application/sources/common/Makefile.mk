@@ -12,3 +12,4 @@ SOURCES_CPP += sources/common/screen_manager.cpp
 
 SOURCES += sources/common/utils.c
 SOURCES += sources/common/xprintf.c
+SOURCES += sources/common/cmd_line.c

@@ -12,15 +12,15 @@ void task_idle(ak_msg_t *msg)
 	switch (msg->sig)
 	{
 	case AC_IDLE_INIT:
-		timer_set(AC_TASK_IDLE_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+		// timer_set(AC_TASK_IDLE_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
 
 		break;
 	case AC_IDLE_RESET:
-		timer_set(AC_TASK_IDLE_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
+		// timer_set(AC_TASK_IDLE_ID, AC_DISPLAY_SHOW_IDLE, 5000, TIMER_PERIODIC);
 
 		break;
 	case AC_IDLE_DEL:
-		timer_remove_attr(AC_TASK_IDLE_ID, AC_DISPLAY_SHOW_IDLE);
+		// timer_remove_attr(AC_TASK_IDLE_ID, AC_DISPLAY_SHOW_IDLE);
 
 		break;
 	case AC_DISPLAY_SHOW_IDLE:

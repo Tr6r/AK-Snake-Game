@@ -50,7 +50,7 @@ void scr_startup_handle(ak_msg_t *msg)
 		APP_DBG_SIG("AC_DISPLAY_INITIAL\n");
 		view_render.initialize();
 		view_render_display_on();
-		timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_MENU, AC_DISPLAY_STARTUP_INTERVAL, TIMER_ONE_SHOT);
+		// timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_MENU, AC_DISPLAY_STARTUP_INTERVAL, TIMER_ONE_SHOT);
 		// SCREEN_TRAN(scr_idle_handle, &scr_idle);
 
 	}

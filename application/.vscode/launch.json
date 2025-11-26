@@ -2,33 +2,49 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug STM32L151 (App @0x08003000)",
+      "name": "FAST Debug STM32L151 (App @0x08003000)",
       "type": "cortex-debug",
       "request": "launch",
       "servertype": "openocd",
-      // File ELF (axf) để debug
-      "executable": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application/build_ak-base-kit-stm32l151-application/ak-base-kit-stm32l151-application.axf",
+
+      // ELF của APP
+      "executable": "/home/dinhcuong/AK-Snake-Game/application/build_ak-base-kit-stm32l151-application/ak-base-kit-stm32l151-application.axf",
+
       "device": "STM32L151RE",
       "runToEntryPoint": "main_app",
-      "svdFile": "/home/dinhcuong/Documents/Git/AK-Snake-Game/application/STM32L151.svd",
-      // "preLaunchTask": "flash",
-      // Đường dẫn GDB compiler
+      "svdFile": "/home/dinhcuong/AK-Snake-Game/application/STM32L151.svd",
+
       "gdbPath": "/home/dinhcuong/Documents/GNU_Toolchain/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gdb",
-      // OpenOCD scripts
+
+      // ⚡ Tăng tốc SWD tương đương bản FAST
+      "serverArgs": [
+        "-c", "adapter speed 6000"
+      ],
+
       "configFiles": [
         "/usr/local/share/openocd/scripts/interface/stlink-v2.cfg",
         "/usr/local/share/openocd/scripts/target/stm32l1.cfg"
       ],
-      // Khi bắt đầu debug, nạp code vào 0x08003000
-      "postLaunchCommands": [
-        "monitor reset halt", // halt ngay sau reset
-        "load", // nạp ELF vào flash
-        "monitor reset init", // init lại CPU
-        "continue"
+
+      // ⚡ Nhanh: chỉ reset + halt, sau đó load app 1 lần
+      "preLaunchCommands": [
+        "monitor reset halt"
       ],
 
+      // // ⚡ load ELF (app) vào 0x08003000
+      // "postLaunchCommands": [
+      //   "load",               // nạp ELF
+      //   "monitor reset init", // khởi động lại và init CPU
+      //   "continue"
+      // ],
 
-      // "showDevDebugOutput": "raw",
+      // ⚡ Tắt LiveWatch
+      "liveWatch": {
+        "enabled": false
+      },
+
+      // ⚡ Cho GDB chạy stream nhanh hơn
+      "gdbTarget": "extended-remote localhost:3333"
     }
   ]
 }

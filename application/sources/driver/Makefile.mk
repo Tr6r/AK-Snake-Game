@@ -7,3 +7,4 @@ include sources/driver/gpio/Makefile.mk
 include sources/driver/buzzer/Makefile.mk
 include sources/driver/buzzer/Makefile.mk
 include sources/driver/SPI/Makefile.mk
+include sources/driver/FOTA/Makefile.mk
