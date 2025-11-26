@@ -131,7 +131,7 @@ This document describes the updated STM32 firmware update (FWU) architecture, wh
 ### 4.3. Transfer Firmware (Chunk Loop)
 ![boot-entry](assets/host_fwu_3.png)
 
-# V. Protocol Specification
+# 5. Protocol Specification
 | Field | Size (bytes) | Value / Range | Description |
 |-------|--------------:|---------------|-------------|
 | SOP   | 1             | 0xEF          | Start of packet |
