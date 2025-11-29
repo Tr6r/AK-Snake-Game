@@ -7,9 +7,9 @@
 
 https://github.com/user-attachments/assets/8ab2e111-32e4-478b-8cb4-f2843a4841f3
 
-
-
-This game was built on top of AK-OS (a lightweight RTOS) together with a small OLED system. The main purpose was to experiment with an event-driven task model — using tasks, message/events, and non-blocking flows — while still keeping the whole project simple and small enough to run on a low-power MCU.
+- The gameplay is inspired by the classic Snake game on old Nokia phones. The logic stays very simple — a moving player, basic direction control, and item pickups — making it a good fit for testing how an event-driven system handles periodic updates and input without blocking.
+  
+- This game was built on top of AK-OS. The main purpose was to experiment with an event-driven pattern — using tasks, message, events, and non-blocking flows — while still keeping the whole project simple and small enough to run on a MCU (STM32l151).
 
 ## I.Introduction
 This is a minimalist Snake Game project running on STM32L151 with a 128×64 OLED display, 1 piezo buzzer and 3 physical push buttons for input control.
@@ -37,16 +37,34 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 - User-adjustable mode, difficulty and buzzer on/off
 - Built-in screen saver: if no user action for 5 seconds, system switches into idle screen
 
-## III.Flow Charts
-The project logic is organized into two main flows: **Settings** and **Gameplay**.  
-Below diagrams illustrate the transitions between screens, tasks, and user interactions:
+## III. Architecture
+| Region             | Address Range              | Description                          |
+|--------------------|----------------------------|--------------------------------------|
+| Bootloader         | 0x08000000 – 0x08001FFF    | 8 KB region, protected, runs on boot |
+| BSF                | 0x08002000 – 0x08002FFF    | 4 KB, stores boot flags & headers    |
+| Application start  | 0x08003000                 | Main firmware                        |
+| Ext_Flash start    | 0x80000                    | Storage new firmware                 |
 
+## IV.Flow Charts
+### The project logic is organized into two main flows: **Settings** and **Gameplay**.  
+### Game Play Flow
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
   <img src="assets/setting_flowchart.png" alt="Settings Flowchart" width="400"/>
+</div>
+
+### Game Menu Flow
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
   <img src="assets/gameplay_flowchart.png" alt="Gameplay Flowchart" width="400"/>
 </div>
 
-## IV.Class
+## V.Class
+### The game is structured around a small set of main classes, each responsible for a core part of the gameplay:
+- Class Game — manages the overall game lifecycle, state updates, and coordination between components.
+- Class Snake — represents the snake entity: position, length, movement direction, and update logic.
+- Class Obstacle — defines static obstacles on the map.
+- Class Apple — handles the apple’s position and the events triggered when the snake eats it.
+
+### In addition to the main classes, the game also uses several lightweight structs to hold simple data elements
 ![alt text](assets/class_diagram.png)
 
 ## V.Task
@@ -88,13 +106,7 @@ Game settings and high scores are persistently stored in the STM32L151 flash(0X0
 ## VII. OTA Firmware Update using UART Shell + External Flash
 This document describes the updated STM32 firmware update (FWU) architecture, where the update is now performed in the Application layer. Using the sys_irq_shell interface to receive data, the task_fw module to write firmware chunks into external flash.
 
-# 1. Architecture
-| Region             | Address Range              | Description                          |
-|--------------------|----------------------------|--------------------------------------|
-| Bootloader         | 0x08000000 – 0x08001FFF    | 8 KB region, protected, runs on boot |
-| BSF                | 0x08002000 – 0x08002FFF    | 4 KB, stores boot flags & headers    |
-| Application start  | 0x08003000                 | Main firmware                        |
-| Ext_Flash start    | 0x80000                    | Storage new firmware                 |
+
 
 # 2. Firmware Update Flow (MCU)
 ### 2.1. Receive CMD and Diasble Shell Stage
