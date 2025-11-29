@@ -68,30 +68,28 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 ## V.Class
 ### The game is structured around a small set of main classes, each responsible for a core part of the gameplay:
 - Class Game — manages the overall game lifecycle, state updates, and coordination between components.
-<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+<div style="display: flex; justify-content: center; gap: 20px;">
   <img src="assets/game/game_class.png" alt="Settings Flowchart"/>
 </div>
 - Class Snake — represents the snake entity: position, length, movement direction, and update logic.
-<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+<div style="display: flex; gap: 20px;">
   <img src="assets/game/snake_class.png" alt="Settings Flowchart"/>
 </div>
 - Class Obstacle — defines static obstacles on the map.
-<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+<div  style="display: flex; gap: 20px;">
   <img src="assets/game/obstacle_class.png" alt="Settings Flowchart"/>
 </div>
 - Class Apple — handles the apple’s position and the events triggered when the snake eats it.
-<div align="center" style="display: flex; justify-content: center; gap: 20px;">
-  <img src="assets/game/apple_class.png" alt="Settings Flowchart"/>
+<div  style="display: flex; gap: 20px;">
+  <img src="assets/game/aple_class.png" alt="Settings Flowchart"/>
 </div>
 ### In addition to the main classes, the game also uses several lightweight structs to hold simple data elements
-<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+<div style="display: flex; gap: 20px;">
   <img src="assets/game/gamestate_struct.png" alt="Settings Flowchart"/>
 </div>
-<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+<div  style="display: flex; justify-content: center; gap: 20px;">
   <img src="assets/game/mode_struct.png" alt="Settings Flowchart"/>
 </div>
-
-![alt text](assets/class_diagram.png)
 
 ## V.Task
 Each task runs independently and has its own private stack. Tasks that handle messages require a message queue
