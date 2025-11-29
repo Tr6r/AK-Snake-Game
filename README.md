@@ -48,25 +48,49 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 ## IV.Flow Charts
 ### The project logic is organized into two main flows: **Settings** and **Gameplay**.  
 ### Game Play Flow
-<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-  <img src="assets/game/settting_flow_1.png" alt="Settings Flowchart" width="400"/>  
-  <img src="assets/game/settting_flow_2.png" alt="Settings Flowchart" width="400"/>
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/settting_flow_1.png" alt="Settings Flowchart"/>  
+
+</div>
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/settting_flow_2.png" alt="Settings Flowchart"/>
 
 </div>
 
 ### Game Menu Flow
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
-  <img src="assets/gameplay_flowchart.png" alt="Gameplay Flowchart" width="400"/>
+  <img src="assets/game/play_flow_1.png" alt="Settings Flowchart"/>
+</div>
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/play_flow_2.png" alt="Settings Flowchart"/>
 </div>
 
 ## V.Class
 ### The game is structured around a small set of main classes, each responsible for a core part of the gameplay:
 - Class Game — manages the overall game lifecycle, state updates, and coordination between components.
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/game_class.png" alt="Settings Flowchart"/>
+</div>
 - Class Snake — represents the snake entity: position, length, movement direction, and update logic.
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/snake_class.png" alt="Settings Flowchart"/>
+</div>
 - Class Obstacle — defines static obstacles on the map.
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/obstacle_class.png" alt="Settings Flowchart"/>
+</div>
 - Class Apple — handles the apple’s position and the events triggered when the snake eats it.
-
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/apple_class.png" alt="Settings Flowchart"/>
+</div>
 ### In addition to the main classes, the game also uses several lightweight structs to hold simple data elements
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/gamestate_struct.png" alt="Settings Flowchart"/>
+</div>
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/game/mode_struct.png" alt="Settings Flowchart"/>
+</div>
+
 ![alt text](assets/class_diagram.png)
 
 ## V.Task
