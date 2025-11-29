@@ -48,8 +48,10 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 ## IV.Flow Charts
 ### The project logic is organized into two main flows: **Settings** and **Gameplay**.  
 ### Game Play Flow
-<div align="center" style="display: flex; justify-content: center; gap: 20px;">
-  <img src="assets/setting_flowchart.png" alt="Settings Flowchart" width="400"/>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+  <img src="assets/game/settting_flow_1.png" alt="Settings Flowchart" width="400"/>  
+  <img src="assets/game/settting_flow_2.png" alt="Settings Flowchart" width="400"/>
+
 </div>
 
 ### Game Menu Flow
