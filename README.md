@@ -91,7 +91,7 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
   <img src="assets/game/mode_struct.png" alt="Settings Flowchart"/>
 </div>
 
-## V.Task
+## VI.Task
 Each task runs independently and has its own private stack. Tasks that handle messages require a message queue
 - Event Handling: Tasks respond to events by executing actions in response to messages.
 - Synchronization: Tasks ensure events are processed in order, avoiding conflicts between concurrent actions.
@@ -107,12 +107,12 @@ Each task runs independently and has its own private stack. Tasks that handle me
 | AC_TASK_LIFE_ID     | TASK_PRI_LEVEL_6   | task_life         |
 | AC_TASK_IDLE_ID     | TASK_PRI_LEVEL_6   | task_idle         |
 
-## VI.EEPROM Storage
+## VII.EEPROM Storage
 Game settings and high scores are persistently stored in the STM32L151 flash(0X0800 0000)
 ## Stored data:
 <img width="300" alt="gameconfig" src="https://github.com/user-attachments/assets/2b198618-d949-4e06-827d-f2671cc8fe7b" />
 
-## VII. OTA Firmware Update using UART Shell + External Flash
+## VIII. OTA Firmware Update using UART Shell + External Flash
 This document describes the updated STM32 firmware update (FWU) architecture, where the update is now performed in the Application layer. Using the sys_irq_shell interface to receive data, the task_fw module to write firmware chunks into external flash.
 
 
