@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/8ab2e111-32e4-478b-8cb4-f2843a4841f3
 ## I.Introduction
 This is a minimalist Snake Game project running on STM32L151 with a 128×64 OLED display, 1 piezo buzzer and 3 physical push buttons for input control.
 <div align="center">
-<img src="assets/game/image.png" width="400" />
+<img src="assets/fota/image.png" width="400" />
 </div>
 The game is designed to be fully standalone on the MCU (no PC connection needed). It supports multiple maps, multiple difficulty levels, persistent user config, stored highscores and in-game animations.
 
@@ -94,7 +94,13 @@ Each task has:
 
 </div>
 
-## IV.Flow Charts
+### 3.2 Task post Flow
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/event_ drivent/task_post.png" alt="Settings Flowchart"/>
+
+</div>
+
+## IV. Game Flow Charts
 ### The project logic is organized into two main flows: **Settings** and **Gameplay**.  
 ### Game Play Flow
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
