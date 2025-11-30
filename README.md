@@ -82,7 +82,18 @@ Each task has:
 - Each priority level has its own message queue.
 - A global bitmask (task_ready) tracks which queues contain messages.
 - The scheduler uses a lookup (LOG2LKUP()) to find the highest active priority efficiently.
-  
+
+### 3. System Flow
+### 3.1 Task Scheduler Flow
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/event_ drivent/task_schedular_1.png" alt="Settings Flowchart"/>  
+
+</div>
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="assets/event_ drivent/task_schedular_2.png" alt="Settings Flowchart"/>
+
+</div>
+
 ## IV.Flow Charts
 ### The project logic is organized into two main flows: **Settings** and **Gameplay**.  
 ### Game Play Flow
