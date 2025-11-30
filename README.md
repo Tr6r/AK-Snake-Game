@@ -192,10 +192,10 @@ This document describes the updated STM32 firmware update (FWU) architecture, wh
 
 ### 3.2. External → Internal Flash Update Flow
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
-![boot-entry](assets/fota/boot_mcu_2.png)
+    <img src="assets/fota/boot_mcu_2.png" alt="Settings Flowchart"/>
 </div>
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
-![boot-entry](assets/fota/boot_mcu_3.png)
+    <img src="assets/fota/boot_mcu_3.png" alt="Settings Flowchart"/>
 </div>
 
 
