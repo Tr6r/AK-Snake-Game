@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/8ab2e111-32e4-478b-8cb4-f2843a4841f3
 ## I.Introduction
 This is a minimalist Snake Game project running on STM32L151 with a 128×64 OLED display, 1 piezo buzzer and 3 physical push buttons for input control.
 <div align="center">
-<img src="assets/image.png" width="400" />
+<img src="assets/game/image.png" width="400" />
 </div>
 The game is designed to be fully standalone on the MCU (no PC connection needed). It supports multiple maps, multiple difficulty levels, persistent user config, stored highscores and in-game animations.
 
@@ -38,6 +38,8 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 - Built-in screen saver: if no user action for 5 seconds, system switches into idle screen
 
 ## III. Architecture
+### 1.Memory Map
+
 | Region             | Address Range              | Description                          |
 |--------------------|----------------------------|--------------------------------------|
 | Bootloader         | 0x08000000 – 0x08001FFF    | 8 KB region, protected, runs on boot |
@@ -45,6 +47,42 @@ The game is designed to be fully standalone on the MCU (no PC connection needed)
 | Application start  | 0x08003000                 | Main firmware                        |
 | Ext_Flash start    | 0x80000                    | Storage new firmware                 |
 
+### 2. System Overview
+### 2.1. Event-Driven Architecture
+- A system model where all behaviors are triggered by events.
+- Each event is packaged into a message, placed in a task’s queue, and processed by a non-blocking handler.
+
+### 2.2 Message (ak_msg)
+- The basic communication unit between tasks. Three types:
+- Pure message – contains only a signal
+- Common message – signal + fixed-size payload
+- Dynamic message – signal + dynamically allocated payload
+- Each message includes: signal, source/destination IDs, ref_count, and a linked-list pointer.
+  
+### 2.3. Signal
+- An identifier for an event. Examples: TIMER_TICK, AC_DISPLAY_SHOW_IDLE, FW_UPDATE_REQ.
+- A signal determines what action a task will perform.
+  
+### 2.4. Task
+- An active object responsible for a specific group of operations.
+Each task has:
+- a priority
+- a message queue
+- a handler function
+- optional polling function
+- optional state machine
+- Tasks do not run continuously — they execute only when a message arrives.
+
+### 2.5. Task Scheduler
+- A priority-based dispatcher.
+- It selects the highest-priority task that has pending messages, executes its handler, and then returns to the scheduler loop.
+- No preemption, no context switching — purely event-driven.
+
+### 2.6. Priority Queue
+- Each priority level has its own message queue.
+- A global bitmask (task_ready) tracks which queues contain messages.
+- The scheduler uses a lookup (LOG2LKUP()) to find the highest active priority efficiently.
+  
 ## IV.Flow Charts
 ### The project logic is organized into two main flows: **Settings** and **Gameplay**.  
 ### Game Play Flow
